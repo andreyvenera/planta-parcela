@@ -224,9 +224,18 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lb .xbtn,.lb .pbtn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .lb .pbtn.warn{border-color:#ff6b63;color:#ff6b63}
 .up{font-size:13px;color:var(--mute);margin:10px 0 0}
+.load{position:fixed;inset:0;z-index:35;background:var(--bg);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .45s ease}
+.load.on{opacity:1;pointer-events:auto}
+.lbox{text-align:center;color:var(--ink)}.lsvg{width:132px;height:132px;display:block;margin:0 auto 10px}
+.lf{fill:var(--lamp);opacity:0;animation:acende 2.6s ease-in-out infinite}
+@keyframes acende{0%,8%{opacity:0}22%,58%{opacity:1}78%,100%{opacity:0}}
+.lt{font-size:34px;line-height:1;margin:0 0 6px}.lt i{font-style:italic}.ls{color:var(--mute);font-size:14px;margin:0 0 14px}
+.lbar{width:160px;height:2px;background:var(--line);margin:0 auto;overflow:hidden;border-radius:2px}.lbar i{display:block;width:40%;height:100%;background:var(--blue);animation:barra 1.3s ease-in-out infinite}
+@keyframes barra{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
+@media(prefers-reduced-motion:reduce){.lf{animation:none;opacity:.9}.lbar i{animation:none;width:100%}}
 .navr{display:flex;gap:8px}button.chip{font:14px Inter,sans-serif;color:var(--ink);cursor:pointer;min-height:40px}
 .gate{position:fixed;inset:0;z-index:30;background:var(--bg);display:none;place-items:center;padding:24px}.gate.on{display:grid}
-.gbox{width:min(360px,100%);text-align:center}.gbox h1{font-size:44px;margin:12px 0 4px}.gl{display:block;text-align:left;font-size:13px;color:var(--mute);margin-bottom:6px}
+.gbox{width:min(360px,100%);text-align:center}.gbox h1{font-size:44px;margin:0 0 4px}.gl{display:block;text-align:left;font-size:13px;color:var(--mute);margin-bottom:6px}
 .gbox input{text-align:center;font-size:22px;letter-spacing:.4em;height:56px}
 #cList .doc{padding:8px 0}#cList .doc:first-child{border-top:0}#cList:empty{display:none}
 .pr{display:flex;align-items:center;gap:6px}
@@ -276,7 +285,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div class="wrap hgrid">
 <div>
 <h1 class="serif">Dois studios na planta, cada <i>parcela</i> no lugar.</h1>
-<p class="lead">Wave Residence e Har Elyon Tower, comprados em sociedade por Andrey e Diego. Lance o que foi pago e veja quanto volta na venda antes das chaves.</p>
+<p class="lead">Wave Residence e Elon Tower, comprados em sociedade por Andrey e Diego. Lance o que foi pago e veja quanto volta na venda antes das chaves.</p>
 <div class="live" aria-live="polite">
 <div><span class="n" id="hPago">R$ 0</span><small>pagos até hoje nos dois</small></div>
 <div><span class="n" id="hLucro">R$ 0</span><small>de lucro com 8% a 10% de valorização</small></div>
@@ -287,7 +296,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </div>
 </div>
 <div class="art" aria-hidden="true">
-<svg viewBox="0 0 520 600" preserveAspectRatio="xMidYMax meet">
+<svg viewBox="0 -50 520 650" preserveAspectRatio="xMidYMax meet">
 <defs>
 <pattern id="hd" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--ink)" stroke-width="1"/></pattern>
 <pattern id="hx" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="4" stroke="var(--ink)" stroke-width="1.1"/><line x1="0" y1="2" x2="4" y2="2" stroke="var(--ink)" stroke-width=".6"/></pattern>
@@ -350,7 +359,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <h3 id="dT">Parcela</h3>
 <p class="hint" id="dH"></p>
 <div class="fg">
-<div id="wProp"><label for="fProp">Imóvel</label><select id="fProp"><option value="wave">Wave Residence</option><option value="elon">Har Elyon Tower</option></select></div>
+<div id="wProp"><label for="fProp">Imóvel</label><select id="fProp"><option value="wave">Wave Residence</option><option value="elon">Elon Tower</option></select></div>
 <div id="wDesc"><label for="fDesc">Descrição</label><input id="fDesc" maxlength="80" placeholder="Ex. diferença de correção do CUB"></div>
 <div class="f2">
 <div><label for="fVal">Valor pago (R$)</label><input id="fVal" inputmode="decimal" autocomplete="off"></div>
@@ -378,10 +387,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <input type="file" id="upFoto" accept="image/*" multiple hidden>
 <input type="file" id="upDoc" accept="application/pdf,image/*,.pdf" multiple hidden>
 <div class="gate on" id="gate" role="dialog" aria-modal="true" aria-labelledby="gT"><form class="gbox" id="gForm" novalidate>
-<svg width="44" height="44" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 30V12l7-5v23M14 30V5l7-3v28M24 30V10l5 3v17" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="2" y="29" width="28" height="2.6" fill="currentColor"/></svg>
-<h1 class="serif" id="gT">Planta &amp; <i>Parcela</i></h1><p class="sub" style="margin:0 0 18px">Wave Residence e Har Elyon Tower</p>
+<h1 class="serif" id="gT">Planta &amp; <i>Parcela</i></h1><p class="sub" style="margin:0 0 18px">Wave Residence e Elon Tower</p>
 <label for="gPin" class="gl">PIN de acesso</label><input id="gPin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
 <button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p></form></div>
+<div class="load" id="load" role="status" aria-live="polite"><div class="lbox">
+<svg class="lsvg" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><g stroke-width=".5" opacity=".35"><line x1="96.0" y1="56.0" x2="112.0" y2="56.0"/><line x1="95.6" y1="61.0" x2="111.5" y2="63.2"/><line x1="94.6" y1="65.9" x2="110.0" y2="70.3"/><line x1="92.9" y1="70.6" x2="107.5" y2="77.2"/><line x1="90.5" y1="75.1" x2="104.1" y2="83.6"/><line x1="87.6" y1="79.1" x2="99.8" y2="89.4"/><line x1="84.1" y1="82.8" x2="94.8" y2="94.6"/><line x1="80.1" y1="85.8" x2="89.1" y2="99.1"/><line x1="75.8" y1="88.4" x2="82.8" y2="102.7"/><line x1="71.1" y1="90.2" x2="76.1" y2="105.5"/><line x1="66.3" y1="91.5" x2="69.0" y2="107.2"/><line x1="61.3" y1="92.0" x2="61.8" y2="108.0"/><line x1="56.2" y1="91.8" x2="54.6" y2="107.7"/><line x1="51.3" y1="90.9" x2="47.4" y2="106.5"/><line x1="46.5" y1="89.4" x2="40.5" y2="104.2"/><line x1="42.0" y1="87.2" x2="34.0" y2="101.0"/><line x1="37.8" y1="84.4" x2="28.0" y2="97.0"/><line x1="34.1" y1="81.0" x2="22.6" y2="92.1"/><line x1="30.9" y1="77.2" x2="17.9" y2="86.6"/><line x1="28.2" y1="72.9" x2="14.1" y2="80.4"/><line x1="26.2" y1="68.3" x2="11.1" y2="73.8"/><line x1="24.8" y1="63.5" x2="9.1" y2="66.8"/><line x1="24.1" y1="58.5" x2="8.1" y2="59.6"/><line x1="24.1" y1="53.5" x2="8.1" y2="52.4"/><line x1="24.8" y1="48.5" x2="9.1" y2="45.2"/><line x1="26.2" y1="43.7" x2="11.1" y2="38.2"/><line x1="28.2" y1="39.1" x2="14.1" y2="31.6"/><line x1="30.9" y1="34.8" x2="17.9" y2="25.4"/><line x1="34.1" y1="31.0" x2="22.6" y2="19.9"/><line x1="37.8" y1="27.6" x2="28.0" y2="15.0"/><line x1="42.0" y1="24.8" x2="34.0" y2="11.0"/><line x1="46.5" y1="22.6" x2="40.5" y2="7.8"/><line x1="51.3" y1="21.1" x2="47.4" y2="5.5"/><line x1="56.2" y1="20.2" x2="54.6" y2="4.3"/><line x1="61.3" y1="20.0" x2="61.8" y2="4.0"/><line x1="66.3" y1="20.5" x2="69.0" y2="4.8"/><line x1="71.1" y1="21.8" x2="76.1" y2="6.5"/><line x1="75.8" y1="23.6" x2="82.8" y2="9.3"/><line x1="80.1" y1="26.2" x2="89.1" y2="12.9"/><line x1="84.1" y1="29.2" x2="94.8" y2="17.4"/><line x1="87.6" y1="32.9" x2="99.8" y2="22.6"/><line x1="90.5" y1="36.9" x2="104.1" y2="28.4"/><line x1="92.9" y1="41.4" x2="107.5" y2="34.8"/><line x1="94.6" y1="46.1" x2="110.0" y2="41.7"/><line x1="95.6" y1="51.0" x2="111.5" y2="48.8"/></g>
+<rect x="22" y="34" width="36" height="72" fill="var(--bg)" stroke-width="1.2"/><rect x="20" y="30" width="40" height="4" fill="var(--bg)" stroke-width="1"/>
+<path d="M78 8l1.6-6 1.6 6z" stroke-width=".8"/><rect x="72" y="8" width="14" height="4" fill="var(--bg)" stroke-width=".9"/><rect x="66" y="12" width="26" height="94" fill="var(--bg)" stroke-width="1.2"/>
+<g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
+<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div></div></div>
 <div class="toast" id="toast" role="status"><span id="tMsg"></span><button type="button" id="tUndo">Desfazer</button></div>
 
 <script>
@@ -405,7 +419,7 @@ const NOME={andrey:'Andrey',diego:'Diego',dois:'Os dois'};
 const PROPS=[
 {id:'wave',nome:'Wave Residence',curto:'Wave',tag:'residence',f:'fw',loc:'Apto 804 · Anita Garibaldi',preco:315000,fator:1.04867,
  mark:'<path d="M2 11c3.5-4.5 7-4.5 10.5 0s7 4.5 10.5 0 5-4.5 7-2" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M2 20c3.5-4.5 7-4.5 10.5 0s7 4.5 10.5 0 5-4.5 7-2" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><rect x="2" y="27" width="28" height="3" fill="currentColor"/>'},
-{id:'elon',nome:'Har Elyon Tower',curto:'Elon',tag:'tower',f:'fe',loc:'Unidade 303 · Saguaçu',preco:315000,fator:1.04896,
+{id:'elon',nome:'Elon Tower',curto:'Elon',tag:'tower',f:'fe',loc:'Unidade 303 · Saguaçu',preco:315000,fator:1.04896,
  mark:'<path d="M10 29V9l6-7 6 7v20z" fill="currentColor"/><path d="M13.5 13h5M13.5 18h5M13.5 23h5" stroke="var(--bg)" stroke-width="2"/><rect x="4" y="28" width="24" height="3" fill="currentColor"/>'}
 ];
 const P=Object.fromEntries(PROPS.map(p=>[p.id,p]));
@@ -769,7 +783,9 @@ addEventListener('scroll',()=>{if(!busy){busy=true;requestAnimationFrame(tick)}}
 const ro=new ResizeObserver(()=>requestAnimationFrame(draw));ro.observe(document.body);
 addEventListener('load',draw);requestAnimationFrame(draw)}
 
+
 /* planilha do Google (Apps Script) */
+const showLoad=t=>{$('loadT').textContent=t||'Carregando as parcelas';$('load').classList.add('on')};let loadAt=Date.now();const hideLoad=()=>{const w=Math.max(0,900-(Date.now()-loadAt));setTimeout(()=>$('load').classList.remove('on'),w)};
 const setSync=(t,on)=>{$('sync').textContent=t;$('sync').classList.toggle('on',!!on)};
 let PIN='';try{PIN=localStorage.getItem('pp_pin')||''}catch(e){}
 const api=async(action,body)=>{if(!/^https:\/\/script\.google\.com\//.test(API_URL))throw {erro:'config'};
@@ -785,12 +801,12 @@ catch(e){if(e&&e.erro==='pin'){sair(silencioso?'':'PIN incorreto.');return false
 const sair=msg=>{PIN='';try{localStorage.removeItem('pp_pin')}catch(e){}$('gE').textContent=msg||'';$('gate').classList.add('on');document.body.classList.add('lock');setTimeout(()=>$('gPin').focus(),50)};
 $('gForm').addEventListener('submit',async e=>{e.preventDefault();const v=$('gPin').value.trim();if(!v){$('gE').textContent='Digite o PIN.';return}
 if(!/^https:\/\/script\.google\.com\//.test(API_URL)){$('gE').textContent='Falta colar o endereço do Apps Script no Index.html (API_URL).';return}
-PIN=v;$('gBtn').disabled=true;$('gE').textContent='';const ok=await carregar();$('gBtn').disabled=false;
-if(ok){try{localStorage.setItem('pp_pin',PIN)}catch(x){}$('gate').classList.remove('on');document.body.classList.remove('lock');$('gPin').value=''}else if(!$('gE').textContent)$('gE').textContent='Não foi possível conectar à planilha.'});
+PIN=v;$('gBtn').disabled=true;$('gE').textContent='';loadAt=Date.now();showLoad('Conferindo o PIN');const ok=await carregar();$('gBtn').disabled=false;if(!ok)$('load').classList.remove('on');
+if(ok){try{localStorage.setItem('pp_pin',PIN)}catch(x){}$('gate').classList.remove('on');document.body.classList.remove('lock');$('gPin').value='';hideLoad()}else if(!$('gE').textContent)$('gE').textContent='Não foi possível conectar à planilha.'});
 $('sync').addEventListener('click',()=>{if(PIN)carregar()});
 $('sairBtn').addEventListener('click',()=>sair(''));
 render();
-if(PIN){$('gate').classList.remove('on');document.body.classList.remove('lock');carregar()}else sair('');
+if(PIN){$('gate').classList.remove('on');document.body.classList.remove('lock');showLoad();carregar().then(()=>hideLoad())}else sair('');
 setInterval(()=>{if(PIN&&document.visibilityState==='visible'&&!$('ov').classList.contains('on')&&!editing&&!sheetId)carregar(true)},45000);
 document.addEventListener('visibilitychange',()=>{if(PIN&&document.visibilityState==='visible')carregar(true)});
 }
