@@ -224,6 +224,7 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lb .xbtn,.lb .pbtn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .lb .pbtn.warn{border-color:#ff6b63;color:#ff6b63}
 .up{font-size:13px;color:var(--mute);margin:10px 0 0}
+#dLido:empty{display:none}#dLido.al{color:var(--red)}
 .phd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 24px;margin-bottom:26px}.phd .sub{margin:0}
 .dlgL{width:min(720px,100%)}
 .drop{display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:var(--mute);cursor:pointer;margin-bottom:14px;transition:background .2s,border-color .2s}
@@ -231,6 +232,7 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lr{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
 .lr .lh{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}.lr .lh b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
 .lg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr);gap:8px}.lg label{font-size:12px;color:var(--mute);display:block;margin-bottom:3px}
+.lr.done{background:var(--soft)}.lr .ok .st{margin-right:6px}
 .lr .warn{color:var(--red);font-size:13px;margin:8px 0 0}.lr .ok{color:var(--mute);font-size:13px;margin:8px 0 0}
 @media(max-width:600px){.lg{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .tema{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;padding:0}
@@ -385,7 +387,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <label class="chk"><input type="checkbox" id="acOk"><span id="acOkL">Diego já devolveu a diferença</span></label>
 <div class="f2" id="acDtW"><div><label for="acDt">Data da devolução</label><input type="date" id="acDt"></div><div><label for="acRv">Valor devolvido (R$)</label><input id="acRv" inputmode="decimal" autocomplete="off"></div></div>
 </div>
-<div><label>Comprovante de pagamento</label><div id="cList"></div><button class="btn out sm" type="button" id="cAdd">Anexar comprovante</button><input type="file" id="upComp" accept="application/pdf,image/*,.pdf" multiple hidden></div>
+<div><label>Comprovante de pagamento</label><div id="cList"></div><button class="btn out sm" type="button" id="cAdd">Anexar comprovante</button><p class="up" id="dLido" aria-live="polite"></p><input type="file" id="upComp" accept="application/pdf,image/*,.pdf" multiple hidden></div>
 <div><label for="fObs">Observação</label><textarea id="fObs" maxlength="200"></textarea></div>
 </div>
 <p class="err" id="dE"></p>
@@ -411,7 +413,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
 <p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div></div></div>
 <div class="ov" id="ovL" role="dialog" aria-modal="true" aria-labelledby="lT"><div class="dlg dlgL"><h3 id="lT">Ler comprovantes</h3>
-<p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. O sistema lê o valor, a data e o imóvel e sugere a parcela. Confira e clique em lançar.</p>
+<p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. Quando a leitura bate com uma parcela, ela já é lançada sozinha. O que ficar em dúvida aparece aqui para você conferir.</p>
 <label class="drop" id="lDrop"><input type="file" id="lFile" accept="application/pdf,image/*,.pdf" multiple hidden><span>Arraste os arquivos aqui ou <b>escolha no computador</b></span></label>
 <div id="lList"></div><p class="err" id="lE"></p>
 <div class="row2"><button class="btn blue sm" type="button" id="lGo" disabled>Lançar</button><button class="btn out sm" type="button" id="lX">Fechar</button></div></div></div>
@@ -566,12 +568,22 @@ $('dT').textContent=c?c.d+' · '+P[c.p].curto:(r?'Editar lançamento':'Outro lan
 $('dH').textContent=c?(r?'Previsto ≈ '+brl2.format(c.v)+'. Corrija o valor se o boleto veio diferente.':'Vence em '+fm(c.m)+', previsto ≈ '+brl2.format(c.v)+'. Confira o valor do boleto com a correção do CUB.'):'Use para correções, aditivos ou taxas que não estão na lista de parcelas.';
 $('fVal').value=r?nf2.format(num(r.valor)):(c?nf2.format(c.v):'');$('fData').value=r?r.data||'':HOJED;$('fQuem').value=r?r.quem||'auto':'auto';$('fObs').value=r?r.obs||'':'';
 $('dDel').style.display=r?'':'none';$('dDel').textContent=extra?'Apagar lançamento':'Desmarcar pagamento';$('dE').textContent='';
-acTouch=false;dComp=r&&Array.isArray(r.comp)?r.comp.filter(x=>x&&typeof x.id==='string').map(x=>Object.assign({},x)):[];dDrop=[];drawComp();acPreview();$('ov').classList.add('on');setTimeout(()=>{$('fVal').focus();$('fVal').select()},30)};
+acTouch=false;dComp=r&&Array.isArray(r.comp)?r.comp.filter(x=>x&&typeof x.id==='string').map(x=>Object.assign({},x)):[];dDrop=[];drawComp();$('dLido').textContent='';$('dLido').classList.remove('al');acPreview();$('ov').classList.add('on');setTimeout(()=>{$('fVal').focus();$('fVal').select()},30)};
 let acTouch=false,dComp=[],dDrop=[];
-const drawComp=()=>{$('cList').innerHTML=dComp.map((x,i)=>`<div class="doc"><span class="ic">${/pdf/.test(x.tipo||'')?'PDF':'IMG'}</span><div><b title="${esc(x.nome)}">${esc(x.nome)}</b><small>${esc(kb(num(x.tam)))}</small></div><div class="da"><a class="pbtn" href="${esc(openOf(x.id))}" target="_blank" rel="noopener">Abrir</a><button class="pbtn" type="button" data-rc="${i}">Remover</button></div></div>`).join('');$('cAdd').textContent=dComp.length?'Anexar outro':'Anexar comprovante'};
+const drawComp=()=>{$('cList').innerHTML=dComp.map((x,i)=>`<div class="doc"><span class="ic">${/pdf/.test(x.tipo||'')?'PDF':'IMG'}</span><div><b title="${esc(x.nome)}">${esc(x.nome)}</b><small>${esc(kb(num(x.tam)))}</small></div><div class="da"><a class="pbtn" href="${esc(openOf(x.id))}" target="_blank" rel="noopener">Abrir</a><button class="pbtn" type="button" data-rc="${i}">Remover</button></div></div>`).join('');$('cAdd').textContent=dComp.length?'Anexar outro':'Anexar comprovante e ler'};
 $('cAdd').addEventListener('click',()=>$('upComp').click());
 $('cList').addEventListener('click',e=>{const b=e.target.closest('[data-rc]');if(!b)return;const x=dComp.splice(+b.dataset.rc,1)[0];if(x)dDrop.push(x.id);drawComp()});
-$('upComp').addEventListener('change',async e=>{const fs=[...e.target.files];e.target.value='';for(const f of fs){$('cAdd').textContent='Enviando…';$('cAdd').disabled=true;try{const r=await storeFile(f);dComp.push({id:r.id,nome:f.name.slice(0,120),tipo:r.tipo,tam:r.tam})}catch(er){const c=er&&er.code;$('dE').textContent=c==='too_large'?f.name+' passa de 20 MB.':c==='unsupported_type'?f.name+' não é PDF nem imagem.':'Não foi possível enviar '+f.name+'.'}$('cAdd').disabled=false;drawComp()}});
+$('upComp').addEventListener('change',async e=>{const fs=[...e.target.files];e.target.value='';for(const f of fs){$('cAdd').textContent='Lendo e enviando…';$('cAdd').disabled=true;$('dLido').textContent='Lendo o comprovante…';
+const leitura=(async()=>{try{return lerTexto(await textoDe(f))}catch(er){return null}})();
+try{const r=await storeFile(f);dComp.push({id:r.id,nome:f.name.slice(0,120),tipo:r.tipo,tam:r.tam})}catch(er){const c=er&&er.code;$('dE').textContent=c==='too_large'?f.name+' passa de 20 MB.':c==='unsupported_type'?f.name+' não é PDF nem imagem.':'Não foi possível enviar '+f.name+'.'}
+const x=await leitura;$('cAdd').disabled=false;drawComp();
+if(!x||(x.valor==null&&!x.data)){$('dLido').textContent='Não consegui ler valor e data deste arquivo. Se for foto, tente uma mais nítida ou o PDF do banco.';continue}
+if(x.valor!=null)$('fVal').value=nf2.format(x.valor);if(x.data)$('fData').value=x.data;acTouch=false;acPreview();
+const c=editId?ITEM[editId]:null;let aviso='';
+if(c){const ref=x.parc&&x.parc.n?null:(x.venc||x.data||'').slice(0,7);if(x.parc&&x.parc.n){const id=(c.p==='wave'?'w_m':'e_m')+pad(x.parc.n);if(ITEM[id]&&id!==c.id)aviso=' O comprovante diz '+ITEM[id].d+', e você está lançando '+c.d+'.'}
+else if(ref&&Math.abs(mIdx(ref)-mIdx(c.m))>1)aviso=' Ele parece ser de '+fm(ref)+', e esta parcela é de '+fm(c.m)+'. Confira.';
+if(!aviso&&x.valor!=null&&Math.abs(x.valor-c.v)/c.v>.25)aviso=' O valor está bem diferente do previsto para esta parcela. Confira.'}
+$('dLido').textContent='Li '+(x.valor!=null?brl2.format(x.valor):'sem valor')+(x.data?' pago em '+fd(x.data):', sem data')+'. Já preenchi os campos.'+aviso;$('dLido').classList.toggle('al',!!aviso)}});
 const acPreview=()=>{const c=editId?ITEM[editId]:null,r0=editId?pagos[editId]:null;const p=c?c.p:(r0?r0.p:$('fProp').value);
 const id=editId||'x_preview',rec={valor:r2(num($('fVal').value)),data:$('fData').value,quem:$('fQuem').value,p,extra:!c,desc:$('fDesc').value};
 const m=c?c.m:String(rec.data||'').slice(0,7);const o=meses({id,rec}).find(x=>x.m===m);const box=$('acBox');
@@ -818,12 +830,18 @@ if(/pagamento|pago em|pago no dia|transa|realizad|efetuad|data\/hora|data e hora
 const ra=/(\d{2})\/(\d{2})\/(\d{4}|\d{2})(?!\d)/g;while((m=ra.exec(txt)))add(m[3],m[2],m[1],m.index);
 const rb=/(\d{4})-(\d{2})-(\d{2})/g;while((m=rb.exec(txt)))add(m[1],m[2],m[3],m.index);
 const rc=new RegExp('(\\d{1,2})\\s*(?:de\\s*)?('+MESES_PT.map(x=>x.slice(0,3)).join('|')+')[a-zç]*\\.?\\s*(?:de\\s*)?(\\d{4})','gi');while((m=rc.exec(low)))add(m[3],MESES_PT.findIndex(x=>x.startsWith(m[2].toLowerCase()))+1,m[1],m.index);
+const vencs=datas.filter(x=>/venc/.test(low.slice(Math.max(0,x.i-50),x.i)));
 datas.sort((a,b)=>b.sc-a.sc||a.i-b.i);
-let p=null;if(/kawa|wave/.test(low))p='wave';if(/soph|elon|elyon/.test(low))p=p?null:'elon';
-return {valor:vals.length?r2(vals[0].v):null,data:datas.length?datas[0].d:null,p}};
+let parc=null;const rp=/parcela\s*(?:n[º°o.]*\s*)?(\d{1,2})\s*(?:\/|de)\s*(\d{1,2})|(\d{1,2})\s*[ªa]\s*parcela/i;const mp=low.match(rp);if(mp)parc=mp[1]?{n:+mp[1],t:+mp[2]}:{n:+mp[3],t:0};
+let p=null;if(/kawa|wave/.test(low))p='wave';if(/soph|elon|elyon/.test(low))p=p?null:'elon';if(!p&&parc&&parc.t===27)p='wave';if(!p&&parc&&parc.t===38)p='elon';
+const data=(datas.find(x=>!vencs.includes(x))||datas[0]||{}).d||null;
+return {valor:vals.length?r2(vals[0].v):null,data,venc:vencs.length?vencs[0].d:null,parc,p}};
 const mIdx=m=>+m.slice(0,4)*12+(+m.slice(5,7));
-const sugerir=(p,valor,data,usados)=>{const mm=(data||HOJED).slice(0,7);let best=null;
-CRON.filter(c=>c.p===p&&!c.chave&&!pagos[c.id]&&!usados.has(c.id)).forEach(c=>{const s=Math.abs(mIdx(c.m)-mIdx(mm))+(valor?Math.abs(c.v-valor)/Math.max(c.v,valor)*6:0);if(!best||s<best.s)best={c,s}});return best};
+const sugerir=(p,valor,data,usados,venc,parc)=>{const livre=c=>c.p===p&&!c.chave&&!pagos[c.id]&&!usados.has(c.id);
+if(parc&&parc.n){const id=p==='wave'?'w_m'+pad(parc.n):'e_m'+pad(parc.n);const c=ITEM[id];if(c&&livre(c)&&(!parc.t||parc.t===(p==='wave'?27:38)))return {c,s:0,certo:true,por:'pelo número da parcela'}}
+const ref=(venc||data||HOJED).slice(0,7);let best=null;
+CRON.filter(livre).forEach(c=>{const dm=mIdx(c.m)-mIdx(ref),dv=valor?Math.abs(c.v-valor)/Math.max(c.v,valor):0;const s=Math.abs(dm)+dv*6+(dm>0?.3:0);if(!best||s<best.s)best={c,s,dm,dv}});
+if(best){best.certo=!!valor&&Math.abs(best.dm)<=(venc?0:1)&&best.dv<=.05;best.por=venc?'pelo vencimento':'pela data do pagamento'}return best};
 const carregarJS=src=>new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('script'));document.head.appendChild(s)});
 const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',PDFW='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',TESS='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
 const ocr=async src=>{await carregarJS(TESS);const r=await window.Tesseract.recognize(src,'por');return r.data.text||''};
@@ -834,6 +852,8 @@ return ocr(f)};
 let LR=[],lendo=0;
 const drawL=()=>{const usados=new Map();LR.forEach(r=>{if(r.st==='ok'&&r.incl&&r.item&&r.item!=='__extra')usados.set(r.item,(usados.get(r.item)||0)+1)});
 $('lList').innerHTML=LR.map((r,i)=>{if(r.st==='lendo')return `<div class="lr"><div class="lh"><b>${esc(r.f.name)}</b><span class="st">Lendo…</span></div></div>`;
+if(r.st==='salvando')return `<div class="lr"><div class="lh"><b>${esc(r.f.name)}</b><span class="st">Lançando…</span></div></div>`;
+if(r.st==='feito'){const c=ITEM[r.salvoId];return `<div class="lr done"><div class="lh"><b title="${esc(r.f.name)}">${esc(r.f.name)}</b><button class="pbtn" type="button" data-desf="${i}">Desfazer</button></div><p class="ok"><span class="st ok">Lançado</span> ${esc(c?P[c.p].curto+' · '+c.d.replace(' reforço','')+' de '+fm(c.m):'Outro lançamento')}, ${esc(brl2.format(r.valor))} pago em ${esc(fd(r.data))}${r.por?'. Mês achado '+esc(r.por):''}.</p></div>`}
 if(r.st==='erro')return `<div class="lr"><div class="lh"><b>${esc(r.f.name)}</b><span class="st due">Não consegui ler</span></div><p class="warn">${esc(r.msg||'Tente uma foto mais nítida ou o PDF original do banco.')}</p></div>`;
 const its=CRON.filter(c=>c.p===r.p&&!c.chave&&(!pagos[c.id]||c.id===r.item));
 const dup=r.item&&r.item!=='__extra'&&usados.get(r.item)>1;
@@ -844,20 +864,23 @@ return `<div class="lr"><div class="lh"><b title="${esc(r.f.name)}">${esc(r.f.na
 <div><label>Data</label><input type="date" data-li="${i}" data-k="data" value="${esc(r.data||'')}"></div></div>
 ${dup?'<p class="warn">Duas leituras apontam para a mesma parcela. Escolha outra em uma delas.</p>':r.nota?`<p class="warn">${esc(r.nota)}</p>`:`<p class="ok">Li ${r.valor!=null?esc(brl2.format(r.valor)):'sem valor'} em ${r.data?esc(fd(r.data)):'data não encontrada'}${r.item&&r.item!=='__extra'&&ITEM[r.item]?', previsto ≈ '+esc(brl2.format(ITEM[r.item].v)):''}.</p>`}</div>`}).join('');
 const n=LR.filter(r=>r.st==='ok'&&r.incl).length,bad=[...usados.values()].some(x=>x>1)||LR.some(r=>r.st==='ok'&&r.incl&&!(r.valor>0&&r.data));
-$('lGo').disabled=!n||bad||lendo>0;$('lGo').textContent=lendo>0?'Lendo '+lendo+(lendo===1?' arquivo…':' arquivos…'):n?'Lançar '+n+(n===1?' pagamento':' pagamentos'):'Lançar'};
+$('lGo').disabled=!n||bad||lendo>0;$('lGo').textContent=lendo>0?'Lendo '+lendo+(lendo===1?' arquivo…':' arquivos…'):n?'Lançar '+n+(n===1?' pagamento para conferir':' pagamentos para conferir'):'Nada para conferir'};
 const processar=async files=>{for(const f of files){if(!/^(image\/|application\/pdf)/.test(f.type)&&!/\.pdf$/i.test(f.name))continue;const r={f,st:'lendo',incl:true};LR.push(r);lendo++;drawL();
 try{const t=await textoDe(f),x=lerTexto(t);r.valor=x.valor;r.data=x.data;
-const usados=new Set(LR.filter(o=>o!==r&&o.item).map(o=>o.item));let p=x.p,s=null;
-if(!p){const a=sugerir('wave',x.valor,x.data,usados),b=sugerir('elon',x.valor,x.data,usados);p=!b||(a&&a.s<=b.s)?'wave':'elon';s=p==='wave'?a:b}else s=sugerir(p,x.valor,x.data,usados);
+const usados=new Set(LR.filter(o=>o!==r&&o.item).map(o=>o.item));let p=x.p,s=null;r.venc=x.venc;r.parc=x.parc;
+if(!p){const a=sugerir('wave',x.valor,x.data,usados,x.venc,x.parc),b=sugerir('elon',x.valor,x.data,usados,x.venc,x.parc);p=!b||(a&&a.s<=b.s)?'wave':'elon';s=p==='wave'?a:b}else s=sugerir(p,x.valor,x.data,usados,x.venc,x.parc);
 r.p=p;r.item=s?s.c.id:'__extra';r.st='ok';
 const falta=[];if(x.valor==null)falta.push('o valor');if(!x.data)falta.push('a data');if(falta.length)r.nota='Não achei '+falta.join(' nem ')+' no comprovante. Preencha antes de lançar.';
-else if(s&&Math.abs(s.c.v-x.valor)/s.c.v>.25)r.nota='O valor lido está bem diferente do previsto para essa parcela. Confira se é a parcela certa.'}
+else if(s&&Math.abs(s.c.v-x.valor)/s.c.v>.25)r.nota='O valor lido está bem diferente do previsto para essa parcela. Confira se é a parcela certa.';
+r.certo=!falta.length&&!!(s&&s.certo);r.por=s&&s.por;
+if(r.certo){lendo--;drawL();await lancar(r);lendo++}}
 catch(e){r.st='erro';r.msg=e&&e.message==='script'?'Não consegui carregar o leitor. Confira a internet e tente de novo.':''}
 lendo--;drawL()}};
 $('lList').addEventListener('input',e=>{const t=e.target,i=+t.dataset.li,k=t.dataset.k,r=LR[i];if(!r||!k)return;
 if(k==='incl')r.incl=t.checked;else if(k==='valor')r.valor=num(t.value)||null;else if(k==='data')r.data=t.value;else if(k==='item')r.item=t.value;
 else if(k==='p'){r.p=t.value;const s=sugerir(r.p,r.valor,r.data,new Set(LR.filter(o=>o!==r&&o.item).map(o=>o.item)));r.item=s?s.c.id:'__extra'}
 r.nota='';if(k!=='valor'&&k!=='data')drawL();else{const n=LR.filter(o=>o.st==='ok'&&o.incl).length;$('lGo').disabled=!n||LR.some(o=>o.st==='ok'&&o.incl&&!(o.valor>0&&o.data))}});
+$('lList').addEventListener('click',async e=>{const b=e.target.closest('[data-desf]');if(!b)return;const r=LR[+b.dataset.desf];if(!r||r.st!=='feito')return;await putPago(r.salvoId,r.prev);if(r.prev===null||!ITEM[r.salvoId]){}r.st='ok';r.incl=true;r.certo=false;r.nota='Lançamento desfeito. Ajuste e clique em lançar se quiser.';drawL()});
 $('lList').addEventListener('change',e=>{if(e.target.dataset.k==='valor'||e.target.dataset.k==='data')drawL()});
 const abrirL=()=>{LR=[];lendo=0;$('lE').textContent='';drawL();$('ovL').classList.add('on')};
 const fecharL=()=>{if(lendo)return;$('ovL').classList.remove('on')};
@@ -866,12 +889,13 @@ $('lFile').addEventListener('change',e=>{processar([...e.target.files]);e.target
 ['dragleave','drop'].forEach(ev=>$('lDrop').addEventListener(ev,e=>{e.preventDefault();$('lDrop').classList.remove('on');if(ev==='drop')processar([...e.dataTransfer.files])}));
 $('lX').addEventListener('click',fecharL);$('ovL').addEventListener('click',e=>{if(e.target===$('ovL'))fecharL()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('ovL').classList.contains('on'))fecharL()});
+const lancar=async r=>{r.st='salvando';drawL();try{const up=await storeFile(r.f),comp=[{id:up.id,nome:r.f.name.slice(0,120),tipo:up.tipo,tam:up.tam}];
+const base={valor:r2(r.valor),data:r.data,quem:'auto',obs:'lido do comprovante',comp};let id=r.item;
+if(r.item==='__extra'){id='x_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);Object.assign(base,{extra:true,p:r.p,desc:'Pagamento '+fd(r.data)})}else{const old=pagos[r.item];if(old&&Array.isArray(old.comp))base.comp=old.comp.concat(comp)}
+r.prev=pagos[id]?JSON.parse(JSON.stringify(pagos[id])):null;r.salvoId=id;await putPago(id,base);r.st='feito';r.incl=false;drawL();return true}catch(e){r.st='ok';r.certo=false;r.nota='Não consegui salvar este. Confira e clique em lançar.';drawL();return false}};
 $('lGo').addEventListener('click',async()=>{const lote=LR.filter(r=>r.st==='ok'&&r.incl&&r.valor>0&&r.data);if(!lote.length)return;$('lGo').disabled=true;$('lX').disabled=true;let ok=0;
-for(const r of lote){$('lGo').textContent='Lançando '+(ok+1)+' de '+lote.length+'…';try{const up=await storeFile(r.f),comp=[{id:up.id,nome:r.f.name.slice(0,120),tipo:up.tipo,tam:up.tam}];
-const base={valor:r2(r.valor),data:r.data,quem:'auto',obs:'lido do comprovante',comp};
-if(r.item==='__extra'){await putPago('x_'+Date.now().toString(36)+ok,Object.assign(base,{extra:true,p:r.p,desc:'Pagamento '+fd(r.data)}))}else{const old=pagos[r.item];if(old&&Array.isArray(old.comp))base.comp=old.comp.concat(comp);await putPago(r.item,base)}
-r.incl=false;r.feito=true;ok++}catch(e){$('lE').textContent='Parei no arquivo '+r.f.name+'. Os anteriores foram lançados.';break}}
-$('lX').disabled=false;LR=LR.filter(r=>!r.feito);drawL();if(ok){toast(ok+(ok===1?' pagamento lançado':' pagamentos lançados')+' a partir dos comprovantes.');if(!LR.length)$('ovL').classList.remove('on')}});
+for(const r of lote){$('lGo').textContent='Lançando '+(ok+1)+' de '+lote.length+'…';if(await lancar(r))ok++;else{$('lE').textContent='Parei no arquivo '+r.f.name+'. Os anteriores foram lançados.';break}}
+$('lX').disabled=false;drawL();if(ok)toast(ok+(ok===1?' pagamento lançado':' pagamentos lançados')+' a partir dos comprovantes.')});
 document.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',abrirL));
 
 /* planilha do Google (Apps Script) */
