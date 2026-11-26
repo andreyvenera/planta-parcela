@@ -224,6 +224,20 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lb .xbtn,.lb .pbtn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .lb .pbtn.warn{border-color:#ff6b63;color:#ff6b63}
 .up{font-size:13px;color:var(--mute);margin:10px 0 0}
+.phd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 24px;margin-bottom:26px}.phd .sub{margin:0}
+.dlgL{width:min(720px,100%)}
+.drop{display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:var(--mute);cursor:pointer;margin-bottom:14px;transition:background .2s,border-color .2s}
+.drop:hover,.drop.on{border-color:var(--blue);background:var(--bsoft)}.drop b{color:var(--blue);font-weight:500}
+.lr{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.lr .lh{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}.lr .lh b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.lg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr);gap:8px}.lg label{font-size:12px;color:var(--mute);display:block;margin-bottom:3px}
+.lr .warn{color:var(--red);font-size:13px;margin:8px 0 0}.lr .ok{color:var(--mute);font-size:13px;margin:8px 0 0}
+@media(max-width:600px){.lg{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.tema{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none;padding:0}
+.tema:hover{border-color:var(--mute)}.tema svg{grid-area:1/1;transition:transform .35s ease,opacity .25s ease}
+.tema .ic-lua{opacity:0;transform:rotate(-60deg) scale(.6)}
+:root[data-theme=dark] .tema .ic-sol{opacity:0;transform:rotate(60deg) scale(.6)}:root[data-theme=dark] .tema .ic-lua{opacity:1;transform:none}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .tema .ic-sol{opacity:0;transform:rotate(60deg) scale(.6)}:root:not([data-theme=light]) .tema .ic-lua{opacity:1;transform:none}}
 .load{position:fixed;inset:0;z-index:35;background:var(--bg);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .45s ease}
 .load.on{opacity:1;pointer-events:auto}
 .lbox{text-align:center;color:var(--ink)}.lsvg{width:132px;height:132px;display:block;margin:0 auto 10px}
@@ -269,16 +283,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 @media(prefers-reduced-motion:no-preference){.meter i,.track i{transition:width .4s ease}.art svg{animation:rise .9s ease both}@keyframes rise{from{opacity:0;transform:translateY(14px)}}}
 @media(max-width:1000px){.props{grid-template-columns:minmax(0,1fr)}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis div:nth-child(3){border-left:0}.kpis div:nth-child(n+3){border-top:1px solid var(--line)}}
 @media(max-width:900px){.shero,.scols{grid-template-columns:minmax(0,1fr)}.hgrid{grid-template-columns:minmax(0,1fr);padding-top:28px}.art{height:340px;order:-1}.links{display:none}.ctl{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:640px){#sairBtn{display:none}.kpis.k3{grid-template-columns:minmax(0,1fr)}.kpis.k3 div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.sk b{font-size:24px}.sk div{padding:12px 14px}.sbar .acts .btn{padding:0 14px}.ln span.t{max-width:62%}.pk{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.pk div:last-child{grid-column:1/-1}.bar{grid-template-columns:minmax(0,1fr) max-content}.bar .track{grid-column:1/-1;grid-row:2}.kpis{grid-template-columns:minmax(0,1fr)}.kpis div{border-left:0!important;border-top:1px solid var(--line)}.kpis div:first-child{border-top:0}.cen,.socios,.resp,.f2{grid-template-columns:minmax(0,1fr)}.card{padding:18px}.chip{padding:8px 12px;font-size:13px}}
+@media(max-width:640px){.brand{font-size:17px;white-space:nowrap;gap:8px}.brand svg{width:22px}#sairBtn{display:none}.kpis.k3{grid-template-columns:minmax(0,1fr)}.kpis.k3 div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.sk b{font-size:24px}.sk div{padding:12px 14px}.sbar .acts .btn{padding:0 14px}.ln span.t{max-width:62%}.pk{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.pk div:last-child{grid-column:1/-1}.bar{grid-template-columns:minmax(0,1fr) max-content}.bar .track{grid-column:1/-1;grid-row:2}.kpis{grid-template-columns:minmax(0,1fr)}.kpis div{border-left:0!important;border-top:1px solid var(--line)}.kpis div:first-child{border-top:0}.cen,.socios,.resp,.f2{grid-template-columns:minmax(0,1fr)}.card{padding:18px}.chip{padding:8px 12px;font-size:13px}}
 @media(max-width:600px){.pt thead{display:none}.pt tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:12px 0;border-bottom:1px solid var(--line)}.pt td{border:0;padding:0}.pt{table-layout:auto}.pt colgroup{display:none}.pt td:nth-child(2){grid-column:2;grid-row:1}.pt td:nth-child(3){grid-row:2}.pt td:nth-child(4){grid-column:2;grid-row:2}table{font-size:14px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7.5em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7em;margin-inline-start:-7.5em;color:var(--mute);font-size:13px}.stack td:empty{display:none}.stack td.r{text-align:start}}
-</style><script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</style><script>try{const t=localStorage.getItem("pp_tema");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script><script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
 <body>
 <svg class="bgr" id="bgr" aria-hidden="true"></svg>
 <nav><div class="wrap">
 <a class="brand" href="#topo"><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 30V12l7-5v23M14 30V5l7-3v28M24 30V10l5 3v17" fill="none" stroke="currentColor" stroke-width="2.6"/><rect x="2" y="29" width="28" height="2.6" fill="currentColor"/></svg>Planta &amp; Parcela</a>
 <div class="links"><a href="#parcelas">Parcelas</a><a href="#venda">Venda</a><a href="#socios">Sócios</a></div>
-<div class="navr"><button class="chip" id="sync" type="button" title="Atualizar agora">Conectando</button><button class="chip" id="sairBtn" type="button">Sair</button></div>
+<div class="navr"><button class="tema" id="temaBtn" type="button" aria-label="Alternar modo claro e escuro" title="Modo claro ou escuro"><svg class="ic-sol" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><svg class="ic-lua" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg></button><button class="chip" id="sync" type="button" title="Atualizar agora">Conectando</button><button class="chip" id="sairBtn" type="button">Sair</button></div>
 </div></nav>
 
 <header class="hero" id="topo">
@@ -292,7 +306,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </div>
 <div class="btns">
 <button class="btn blue" id="hPagar" type="button">Lançar parcela <span class="ar" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-<a class="btn out" href="#venda">Ver a venda</a>
+<button class="btn out" type="button" data-ler>Ler comprovantes</button>
 </div>
 </div>
 <div class="art" aria-hidden="true">
@@ -316,7 +330,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <main class="wrap">
 <section class="blk" id="parcelas">
 <h2 class="serif">Parcelas <i>pagas</i></h2>
-<p class="sub">Toque em Pagar quando sair um boleto e em Editar para corrigir o valor. Em dezembro, é aqui que entra a revisão de tudo que foi pago no ano.</p>
+<div class="phd"><p class="sub">Toque em Pagar quando sair um boleto e em Editar para corrigir o valor. Ou anexe os comprovantes e deixe o sistema ler valor, data e parcela.</p><button class="btn blue sm" type="button" data-ler>Ler comprovantes</button></div>
 <div class="props" id="props"></div>
 </section>
 
@@ -396,6 +410,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <path d="M78 8l1.6-6 1.6 6z" stroke-width=".8"/><rect x="72" y="8" width="14" height="4" fill="var(--bg)" stroke-width=".9"/><rect x="66" y="12" width="26" height="94" fill="var(--bg)" stroke-width="1.2"/>
 <g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
 <p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div></div></div>
+<div class="ov" id="ovL" role="dialog" aria-modal="true" aria-labelledby="lT"><div class="dlg dlgL"><h3 id="lT">Ler comprovantes</h3>
+<p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. O sistema lê o valor, a data e o imóvel e sugere a parcela. Confira e clique em lançar.</p>
+<label class="drop" id="lDrop"><input type="file" id="lFile" accept="application/pdf,image/*,.pdf" multiple hidden><span>Arraste os arquivos aqui ou <b>escolha no computador</b></span></label>
+<div id="lList"></div><p class="err" id="lE"></p>
+<div class="row2"><button class="btn blue sm" type="button" id="lGo" disabled>Lançar</button><button class="btn out sm" type="button" id="lX">Fechar</button></div></div></div>
 <div class="toast" id="toast" role="status"><span id="tMsg"></span><button type="button" id="tUndo">Desfazer</button></div>
 
 <script>
@@ -715,6 +734,8 @@ t+=`<rect x="326" y="510" width="40" height="34" fill="var(--bg)" stroke-width="
 [[30,520],[262,522],[452,518]].forEach(([x,y])=>{t+=`<circle cx="${x+12}" cy="${y}" r="14" fill="url(#hd)" stroke-width="1"/><line x1="${x+12}" y1="${y+14}" x2="${x+12}" y2="544" stroke-width="1.2"/>`});
 $('towers').innerHTML=t}
 
+/* modo claro e escuro */
+$('temaBtn').addEventListener('click',()=>{const r=document.documentElement,atual=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'),novo=atual==='dark'?'light':'dark';r.dataset.theme=novo;try{localStorage.setItem('pp_tema',novo)}catch(e){}$('temaBtn').setAttribute('aria-pressed',novo==='dark'?'true':'false')});
 /* luzes que acendem com o mouse */
 const lights=(svg,rx,ry)=>{const L=[...svg.querySelectorAll('.lamp')].map(el=>{const b=el.getBBox();return {el,x:b.x+b.width/2,y:b.y+b.height/2,w:b.width/2}});
 const mv=e=>{const m=svg.getScreenCTM();if(!m)return;const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());
@@ -783,6 +804,75 @@ addEventListener('scroll',()=>{if(!busy){busy=true;requestAnimationFrame(tick)}}
 const ro=new ResizeObserver(()=>requestAnimationFrame(draw));ro.observe(document.body);
 addEventListener('load',draw);requestAnimationFrame(draw)}
 
+
+/* leitura automática de comprovantes (PDF com texto, PDF escaneado e foto) */
+const MESES_PT=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const lerTexto=t=>{const txt=String(t||'').replace(/ /g,' ').replace(/[ \t]+/g,' ');const low=txt.toLowerCase();
+const vals=[];const rv=/(R\$\s*)?(\d{1,3}(?:\.\d{3})*,\d{2}|\d+,\d{2})(?!\d)/g;let m;
+while((m=rv.exec(txt))){const v=parseFloat(m[2].replace(/\./g,'').replace(',','.'));if(!(v>0))continue;const antes=low.slice(Math.max(0,m.index-45),m.index);let sc=0;
+if(/valor\s*(pago|cobrado|total|do pagamento|da transfer|do pix|debitado|da operação|transferido)|total\s*pago|pagamento\s*efetuado/.test(antes))sc+=4;else if(/valor|total|pago|pix/.test(antes))sc+=2;
+if(m[1])sc+=1;if(/juros|multa|desconto|tarifa|saldo|limite|abatimento|encargo|mora/.test(antes))sc-=4;vals.push({v,sc,i:m.index})}
+vals.sort((a,b)=>b.sc-a.sc||b.v-a.v);
+const datas=[];const add=(y,mo,d,i)=>{y=+y;if(y<100)y+=2000;mo=+mo;d=+d;if(mo<1||mo>12||d<1||d>31||y<2020||y>2035)return;const antes=low.slice(Math.max(0,i-50),i);let sc=0;
+if(/pagamento|pago em|pago no dia|transa|realizad|efetuad|data\/hora|data e hora|opera|debitad|emiss|comprovante/.test(antes))sc+=3;if(/venc/.test(antes))sc-=4;if(/nascimento|abertura/.test(antes))sc-=5;datas.push({d:y+'-'+pad(mo)+'-'+pad(d),sc,i})};
+const ra=/(\d{2})\/(\d{2})\/(\d{4}|\d{2})(?!\d)/g;while((m=ra.exec(txt)))add(m[3],m[2],m[1],m.index);
+const rb=/(\d{4})-(\d{2})-(\d{2})/g;while((m=rb.exec(txt)))add(m[1],m[2],m[3],m.index);
+const rc=new RegExp('(\\d{1,2})\\s*(?:de\\s*)?('+MESES_PT.map(x=>x.slice(0,3)).join('|')+')[a-zç]*\\.?\\s*(?:de\\s*)?(\\d{4})','gi');while((m=rc.exec(low)))add(m[3],MESES_PT.findIndex(x=>x.startsWith(m[2].toLowerCase()))+1,m[1],m.index);
+datas.sort((a,b)=>b.sc-a.sc||a.i-b.i);
+let p=null;if(/kawa|wave/.test(low))p='wave';if(/soph|elon|elyon/.test(low))p=p?null:'elon';
+return {valor:vals.length?r2(vals[0].v):null,data:datas.length?datas[0].d:null,p}};
+const mIdx=m=>+m.slice(0,4)*12+(+m.slice(5,7));
+const sugerir=(p,valor,data,usados)=>{const mm=(data||HOJED).slice(0,7);let best=null;
+CRON.filter(c=>c.p===p&&!c.chave&&!pagos[c.id]&&!usados.has(c.id)).forEach(c=>{const s=Math.abs(mIdx(c.m)-mIdx(mm))+(valor?Math.abs(c.v-valor)/Math.max(c.v,valor)*6:0);if(!best||s<best.s)best={c,s}});return best};
+const carregarJS=src=>new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('script'));document.head.appendChild(s)});
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',PDFW='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',TESS='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+const ocr=async src=>{await carregarJS(TESS);const r=await window.Tesseract.recognize(src,'por');return r.data.text||''};
+const textoDe=async f=>{if(/pdf/.test(f.type)||/\.pdf$/i.test(f.name)){await carregarJS(PDFJS);const L=window.pdfjsLib;L.GlobalWorkerOptions.workerSrc=PDFW;
+const doc=await L.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;let t='';for(let i=1;i<=Math.min(doc.numPages,3);i++){const pg=await doc.getPage(i),tc=await pg.getTextContent();let y=null;tc.items.forEach(it=>{const yy=Math.round(it.transform[5]);t+=(y!==null&&Math.abs(yy-y)>2?'\n':' ')+it.str;y=yy});t+='\n'}
+if(t.replace(/\s/g,'').length>30)return t;const pg=await doc.getPage(1),vp=pg.getViewport({scale:2.2}),cv=document.createElement('canvas');cv.width=vp.width;cv.height=vp.height;await pg.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;return ocr(cv)}
+return ocr(f)};
+let LR=[],lendo=0;
+const drawL=()=>{const usados=new Map();LR.forEach(r=>{if(r.st==='ok'&&r.incl&&r.item&&r.item!=='__extra')usados.set(r.item,(usados.get(r.item)||0)+1)});
+$('lList').innerHTML=LR.map((r,i)=>{if(r.st==='lendo')return `<div class="lr"><div class="lh"><b>${esc(r.f.name)}</b><span class="st">Lendo…</span></div></div>`;
+if(r.st==='erro')return `<div class="lr"><div class="lh"><b>${esc(r.f.name)}</b><span class="st due">Não consegui ler</span></div><p class="warn">${esc(r.msg||'Tente uma foto mais nítida ou o PDF original do banco.')}</p></div>`;
+const its=CRON.filter(c=>c.p===r.p&&!c.chave&&(!pagos[c.id]||c.id===r.item));
+const dup=r.item&&r.item!=='__extra'&&usados.get(r.item)>1;
+return `<div class="lr"><div class="lh"><b title="${esc(r.f.name)}">${esc(r.f.name)}</b><label class="chk" style="margin:0!important;min-height:32px"><input type="checkbox" data-li="${i}" data-k="incl" ${r.incl?'checked':''}><span>Lançar</span></label></div>
+<div class="lg"><div><label>Imóvel</label><select data-li="${i}" data-k="p"><option value="wave"${r.p==='wave'?' selected':''}>Wave</option><option value="elon"${r.p==='elon'?' selected':''}>Elon</option></select></div>
+<div><label>Parcela</label><select data-li="${i}" data-k="item">${its.map(c=>`<option value="${c.id}"${c.id===r.item?' selected':''}>${esc(c.d.replace(' reforço',''))} · ${esc(fm(c.m).replace(' 20',' '))}</option>`).join('')}<option value="__extra"${r.item==='__extra'?' selected':''}>Outro lançamento</option></select></div>
+<div><label>Valor (R$)</label><input data-li="${i}" data-k="valor" inputmode="decimal" value="${r.valor!=null?esc(nf2.format(r.valor)):''}"></div>
+<div><label>Data</label><input type="date" data-li="${i}" data-k="data" value="${esc(r.data||'')}"></div></div>
+${dup?'<p class="warn">Duas leituras apontam para a mesma parcela. Escolha outra em uma delas.</p>':r.nota?`<p class="warn">${esc(r.nota)}</p>`:`<p class="ok">Li ${r.valor!=null?esc(brl2.format(r.valor)):'sem valor'} em ${r.data?esc(fd(r.data)):'data não encontrada'}${r.item&&r.item!=='__extra'&&ITEM[r.item]?', previsto ≈ '+esc(brl2.format(ITEM[r.item].v)):''}.</p>`}</div>`}).join('');
+const n=LR.filter(r=>r.st==='ok'&&r.incl).length,bad=[...usados.values()].some(x=>x>1)||LR.some(r=>r.st==='ok'&&r.incl&&!(r.valor>0&&r.data));
+$('lGo').disabled=!n||bad||lendo>0;$('lGo').textContent=lendo>0?'Lendo '+lendo+(lendo===1?' arquivo…':' arquivos…'):n?'Lançar '+n+(n===1?' pagamento':' pagamentos'):'Lançar'};
+const processar=async files=>{for(const f of files){if(!/^(image\/|application\/pdf)/.test(f.type)&&!/\.pdf$/i.test(f.name))continue;const r={f,st:'lendo',incl:true};LR.push(r);lendo++;drawL();
+try{const t=await textoDe(f),x=lerTexto(t);r.valor=x.valor;r.data=x.data;
+const usados=new Set(LR.filter(o=>o!==r&&o.item).map(o=>o.item));let p=x.p,s=null;
+if(!p){const a=sugerir('wave',x.valor,x.data,usados),b=sugerir('elon',x.valor,x.data,usados);p=!b||(a&&a.s<=b.s)?'wave':'elon';s=p==='wave'?a:b}else s=sugerir(p,x.valor,x.data,usados);
+r.p=p;r.item=s?s.c.id:'__extra';r.st='ok';
+const falta=[];if(x.valor==null)falta.push('o valor');if(!x.data)falta.push('a data');if(falta.length)r.nota='Não achei '+falta.join(' nem ')+' no comprovante. Preencha antes de lançar.';
+else if(s&&Math.abs(s.c.v-x.valor)/s.c.v>.25)r.nota='O valor lido está bem diferente do previsto para essa parcela. Confira se é a parcela certa.'}
+catch(e){r.st='erro';r.msg=e&&e.message==='script'?'Não consegui carregar o leitor. Confira a internet e tente de novo.':''}
+lendo--;drawL()}};
+$('lList').addEventListener('input',e=>{const t=e.target,i=+t.dataset.li,k=t.dataset.k,r=LR[i];if(!r||!k)return;
+if(k==='incl')r.incl=t.checked;else if(k==='valor')r.valor=num(t.value)||null;else if(k==='data')r.data=t.value;else if(k==='item')r.item=t.value;
+else if(k==='p'){r.p=t.value;const s=sugerir(r.p,r.valor,r.data,new Set(LR.filter(o=>o!==r&&o.item).map(o=>o.item)));r.item=s?s.c.id:'__extra'}
+r.nota='';if(k!=='valor'&&k!=='data')drawL();else{const n=LR.filter(o=>o.st==='ok'&&o.incl).length;$('lGo').disabled=!n||LR.some(o=>o.st==='ok'&&o.incl&&!(o.valor>0&&o.data))}});
+$('lList').addEventListener('change',e=>{if(e.target.dataset.k==='valor'||e.target.dataset.k==='data')drawL()});
+const abrirL=()=>{LR=[];lendo=0;$('lE').textContent='';drawL();$('ovL').classList.add('on')};
+const fecharL=()=>{if(lendo)return;$('ovL').classList.remove('on')};
+$('lFile').addEventListener('change',e=>{processar([...e.target.files]);e.target.value=''});
+['dragover','dragenter'].forEach(ev=>$('lDrop').addEventListener(ev,e=>{e.preventDefault();$('lDrop').classList.add('on')}));
+['dragleave','drop'].forEach(ev=>$('lDrop').addEventListener(ev,e=>{e.preventDefault();$('lDrop').classList.remove('on');if(ev==='drop')processar([...e.dataTransfer.files])}));
+$('lX').addEventListener('click',fecharL);$('ovL').addEventListener('click',e=>{if(e.target===$('ovL'))fecharL()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('ovL').classList.contains('on'))fecharL()});
+$('lGo').addEventListener('click',async()=>{const lote=LR.filter(r=>r.st==='ok'&&r.incl&&r.valor>0&&r.data);if(!lote.length)return;$('lGo').disabled=true;$('lX').disabled=true;let ok=0;
+for(const r of lote){$('lGo').textContent='Lançando '+(ok+1)+' de '+lote.length+'…';try{const up=await storeFile(r.f),comp=[{id:up.id,nome:r.f.name.slice(0,120),tipo:up.tipo,tam:up.tam}];
+const base={valor:r2(r.valor),data:r.data,quem:'auto',obs:'lido do comprovante',comp};
+if(r.item==='__extra'){await putPago('x_'+Date.now().toString(36)+ok,Object.assign(base,{extra:true,p:r.p,desc:'Pagamento '+fd(r.data)}))}else{const old=pagos[r.item];if(old&&Array.isArray(old.comp))base.comp=old.comp.concat(comp);await putPago(r.item,base)}
+r.incl=false;r.feito=true;ok++}catch(e){$('lE').textContent='Parei no arquivo '+r.f.name+'. Os anteriores foram lançados.';break}}
+$('lX').disabled=false;LR=LR.filter(r=>!r.feito);drawL();if(ok){toast(ok+(ok===1?' pagamento lançado':' pagamentos lançados')+' a partir dos comprovantes.');if(!LR.length)$('ovL').classList.remove('on')}});
+document.querySelectorAll('[data-ler]').forEach(b=>b.addEventListener('click',abrirL));
 
 /* planilha do Google (Apps Script) */
 const showLoad=t=>{$('loadT').textContent=t||'Carregando as parcelas';$('load').classList.add('on')};let loadAt=Date.now();const hideLoad=()=>{const w=Math.max(0,900-(Date.now()-loadAt));setTimeout(()=>$('load').classList.remove('on'),w)};
