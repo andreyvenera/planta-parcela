@@ -224,6 +224,9 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lb .xbtn,.lb .pbtn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .lb .pbtn.warn{border-color:#ff6b63;color:#ff6b63}
 .up{font-size:13px;color:var(--mute);margin:10px 0 0}
+.dif .n{color:var(--red)}.dif small{max-width:22em}
+.aw{color:var(--mute)!important;font-style:italic}
+.acout{font-size:13px;color:var(--red);margin:8px 0 0}.acout:empty{display:none}
 .fv{font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .gbox .fv{display:inline-block}
 .fr2{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -308,6 +311,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div class="live" aria-live="polite">
 <div><span class="n" id="hPago">R$ 0</span><small>pagos até hoje nos dois</small></div>
 <div><span class="n" id="hLucro">R$ 0</span><small>de lucro com 8% a 10% de valorização</small></div>
+<div class="dif" id="hDifW" hidden><span class="n" id="hDif">R$ 0</span><small id="hDifL">de diferença que o Diego ainda não devolveu</small></div>
 </div>
 <div class="btns">
 <button class="btn blue" id="hPagar" type="button">Lançar parcela <span class="ar" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
@@ -371,7 +375,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </div>
 </section>
 </main>
-<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 1.9 · 26/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
+<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 2.0 · 26/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dT">
 <form class="dlg" id="dlg" novalidate>
@@ -387,6 +391,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div><label for="fQuem">Quem pagou</label><select id="fQuem"><option value="auto">Quem paga o imóvel</option><option value="andrey">Andrey</option><option value="diego">Diego</option><option value="dois">Os dois, metade cada</option></select></div>
 <div class="acb" id="acBox"><b id="acT">Reembolso da diferença</b><div id="acRows"></div>
 <div class="acl tot"><span id="acL">Diego devolve</span><b id="acV">R$ 0</b></div>
+<p class="acout" id="acOut"></p>
 <label class="chk"><input type="checkbox" id="acOk"><span id="acOkL">Diego já devolveu a diferença</span></label>
 <div class="f2" id="acDtW"><div><label for="acDt">Data da devolução</label><input type="date" id="acDt"></div><div><label for="acRv">Valor devolvido (R$)</label><input id="acRv" inputmode="decimal" autocomplete="off"></div></div>
 </div>
@@ -408,13 +413,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div class="gate on" id="gate" role="dialog" aria-modal="true" aria-labelledby="gT"><form class="gbox" id="gForm" novalidate>
 <h1 class="serif" id="gT">Planta &amp; <i>Parcela</i></h1><p class="sub" style="margin:0 0 18px">Wave Residence e Elon Tower</p>
 <label for="gPin" class="gl">PIN de acesso</label><input id="gPin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
-<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 1.9 · 26/11/2026</p></form></div>
+<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 2.0 · 26/11/2026</p></form></div>
 <div class="load" id="load" role="status" aria-live="polite"><div class="lbox">
 <svg class="lsvg" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><g stroke-width=".5" opacity=".35"><line x1="96.0" y1="56.0" x2="112.0" y2="56.0"/><line x1="95.6" y1="61.0" x2="111.5" y2="63.2"/><line x1="94.6" y1="65.9" x2="110.0" y2="70.3"/><line x1="92.9" y1="70.6" x2="107.5" y2="77.2"/><line x1="90.5" y1="75.1" x2="104.1" y2="83.6"/><line x1="87.6" y1="79.1" x2="99.8" y2="89.4"/><line x1="84.1" y1="82.8" x2="94.8" y2="94.6"/><line x1="80.1" y1="85.8" x2="89.1" y2="99.1"/><line x1="75.8" y1="88.4" x2="82.8" y2="102.7"/><line x1="71.1" y1="90.2" x2="76.1" y2="105.5"/><line x1="66.3" y1="91.5" x2="69.0" y2="107.2"/><line x1="61.3" y1="92.0" x2="61.8" y2="108.0"/><line x1="56.2" y1="91.8" x2="54.6" y2="107.7"/><line x1="51.3" y1="90.9" x2="47.4" y2="106.5"/><line x1="46.5" y1="89.4" x2="40.5" y2="104.2"/><line x1="42.0" y1="87.2" x2="34.0" y2="101.0"/><line x1="37.8" y1="84.4" x2="28.0" y2="97.0"/><line x1="34.1" y1="81.0" x2="22.6" y2="92.1"/><line x1="30.9" y1="77.2" x2="17.9" y2="86.6"/><line x1="28.2" y1="72.9" x2="14.1" y2="80.4"/><line x1="26.2" y1="68.3" x2="11.1" y2="73.8"/><line x1="24.8" y1="63.5" x2="9.1" y2="66.8"/><line x1="24.1" y1="58.5" x2="8.1" y2="59.6"/><line x1="24.1" y1="53.5" x2="8.1" y2="52.4"/><line x1="24.8" y1="48.5" x2="9.1" y2="45.2"/><line x1="26.2" y1="43.7" x2="11.1" y2="38.2"/><line x1="28.2" y1="39.1" x2="14.1" y2="31.6"/><line x1="30.9" y1="34.8" x2="17.9" y2="25.4"/><line x1="34.1" y1="31.0" x2="22.6" y2="19.9"/><line x1="37.8" y1="27.6" x2="28.0" y2="15.0"/><line x1="42.0" y1="24.8" x2="34.0" y2="11.0"/><line x1="46.5" y1="22.6" x2="40.5" y2="7.8"/><line x1="51.3" y1="21.1" x2="47.4" y2="5.5"/><line x1="56.2" y1="20.2" x2="54.6" y2="4.3"/><line x1="61.3" y1="20.0" x2="61.8" y2="4.0"/><line x1="66.3" y1="20.5" x2="69.0" y2="4.8"/><line x1="71.1" y1="21.8" x2="76.1" y2="6.5"/><line x1="75.8" y1="23.6" x2="82.8" y2="9.3"/><line x1="80.1" y1="26.2" x2="89.1" y2="12.9"/><line x1="84.1" y1="29.2" x2="94.8" y2="17.4"/><line x1="87.6" y1="32.9" x2="99.8" y2="22.6"/><line x1="90.5" y1="36.9" x2="104.1" y2="28.4"/><line x1="92.9" y1="41.4" x2="107.5" y2="34.8"/><line x1="94.6" y1="46.1" x2="110.0" y2="41.7"/><line x1="95.6" y1="51.0" x2="111.5" y2="48.8"/></g>
 <rect x="22" y="34" width="36" height="72" fill="var(--bg)" stroke-width="1.2"/><rect x="20" y="30" width="40" height="4" fill="var(--bg)" stroke-width="1"/>
 <path d="M78 8l1.6-6 1.6 6z" stroke-width=".8"/><rect x="72" y="8" width="14" height="4" fill="var(--bg)" stroke-width=".9"/><rect x="66" y="12" width="26" height="94" fill="var(--bg)" stroke-width="1.2"/>
 <g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
-<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 1.9 · 26/11/2026</p></div></div>
+<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 2.0 · 26/11/2026</p></div></div>
 <div class="ov" id="ovL" role="dialog" aria-modal="true" aria-labelledby="lT"><div class="dlg dlgL"><h3 id="lT">Ler comprovantes</h3>
 <p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. Quando a leitura bate com uma parcela, ela já é lançada sozinha. O que ficar em dúvida aparece aqui para você conferir.</p>
 <label class="drop" id="lDrop"><input type="file" id="lFile" accept="application/pdf,image/*,.pdf" multiple hidden><span>Arraste os arquivos aqui ou <b>escolha no computador</b></span></label>
@@ -459,7 +464,7 @@ return L.sort((a,b)=>a.p!==b.p?(a.p<b.p?1:-1):((!!a.chave)-(!!b.chave))||((a.m||
 const ITEM=Object.fromEntries(CRON.map(c=>[c.id,c]));
 
 const DEF={val:8,venda:'2028-07',resp:{wave:'andrey',elon:'diego'}};
-const VERSAO='1.9';
+const VERSAO='2.0';
 const API_URL='https://script.google.com/macros/s/AKfycbzfrpGoM-oHz4pOIceDzqyn-Q5yRWOX83nXJSl9yJzLdas0BoGHW-cn1GsLTCb8Puf9/exec';
 const LK='planta-parcela-cache-v1';
 const FDEF={
@@ -499,7 +504,7 @@ Object.values(pagos).filter(r=>r&&r.extra&&r.p===p.id).forEach(r=>{const v=num(r
 o.proj=o.pago+o.fut;o.ganho=p.preco*cfg.val/100;o.ret=o.proj+o.ganho;
 R[p.id]=o;['pago','ano','proj','ganho'].forEach(k=>R.tot[k]+=o[k]);R.tot.preco+=p.preco});
 R.tot.ret=R.tot.proj+R.tot.ganho;
-R.ac={pend:0,ok:0,n:0,lista:meses()};R.ac.lista.forEach(o=>{if(Math.abs(o.dev)<.01)return;const sg=o.dev>0?1:-1;if(o.k){R.ac.ok+=sg*o.rec}if(o.saldo>=.01&&!o.falta.length){R.ac.pend+=sg*o.saldo;R.ac.n++}});
+R.ac={pend:0,ok:0,n:0,meses:[],lista:meses()};R.ac.lista.forEach(o=>{if(Math.abs(o.dev)<.01)return;const sg=o.dev>0?1:-1;if(o.k){R.ac.ok+=sg*o.rec}if(o.saldo>=.01&&!o.falta.length){R.ac.pend+=sg*o.saldo;R.ac.n++;R.ac.meses.push(o.m)}});
 return R};
 
 const logo=(p,ink)=>`<span class="logo ${p.f}${ink?' ink':''}" role="img" aria-label="${esc(p.nome)}"><svg viewBox="0 0 32 32" aria-hidden="true">${p.mark}</svg><span class="wm" aria-hidden="true"><b>${esc(p.curto)}</b><small>${esc(p.tag)}</small></span></span>`;
@@ -527,6 +532,7 @@ const render=()=>{
 PROPS.forEach(p=>p.preco=num(F(p.id).valor)||315000);
 const R=calc(),T=R.tot;LASTR=R;
 $('hPago').textContent=brl.format(T.pago);
+{const A=R.ac,ms=[...A.meses].sort();$('hDifW').hidden=Math.abs(A.pend)<.01;$('hDif').textContent=brl2.format(Math.abs(A.pend));$('hDifL').textContent=(A.pend>=0?'de diferença que o Diego ainda não devolveu':'de diferença que o Andrey ainda deve ao Diego')+(ms.length?', '+ms.map(x=>fm(x).slice(0,3)+'/'+x.slice(2,4)).join(', '):'')}
 $('hLucro').textContent=brl.format(T.preco*.08)+' a '+brl.format(T.preco*.10);
 $('strip').innerHTML=PROPS.map(p=>`<button class="sp open" type="button" data-open="${p.id}" aria-label="Abrir a ficha de ${esc(p.nome)}">${logo(p)}<span class="pc">${esc(pctf.format(R[p.id].pago/p.preco*100))}%<small>${esc(brl.format(R[p.id].pago))} pagos</small></span></button>`).join('');
 drawProps(R);
@@ -592,15 +598,15 @@ const acPreview=()=>{const c=editId?ITEM[editId]:null,r0=editId?pagos[editId]:nu
 const id=editId||'x_preview',rec={valor:r2(num($('fVal').value)),data:$('fData').value,quem:$('fQuem').value,p,extra:!c,desc:$('fDesc').value};
 const m=c?c.m:String(rec.data||'').slice(0,7);const o=meses({id,rec}).find(x=>x.m===m);const box=$('acBox');
 if(!o||!m){box.style.display='none';return}box.style.display='';
-const est=o.falta.map(x=>({nome:P[x.p].curto+' · '+x.d,w:quem(x.p,'auto'),v:x.v,e:true}));
-const all=o.it.concat(est);let a=0,d=0;all.forEach(x=>{if(x.w==='dois'){a+=x.v/2;d+=x.v/2}else if(x.w==='andrey')a+=x.v;else d+=x.v});const dev=r2((a-d)/2+Math.sign(a-d)*1e-7);
+const all=o.it;const espera=o.falta.length>0;let a=0,d=0;all.forEach(x=>{if(x.w==='dois'){a+=x.v/2;d+=x.v/2}else if(x.w==='andrey')a+=x.v;else d+=x.v});const dev=r2((a-d)/2+Math.sign(a-d)*1e-7);
 $('acT').textContent='Reembolso da diferença, '+fm(m);
-$('acRows').innerHTML=all.map(x=>`<div class="acl"><span>${esc(x.nome)}, ${esc(NOME[x.w]||'')}</span><span>${x.e?'≈ ':''}${esc(brl2.format(x.v))}</span></div>`).join('')+`<div class="acl"><span>Metade para cada um</span><span>${o.falta.length?'≈ ':''}${esc(brl2.format((a+d)/2))}</span></div>`;
-$('acL').textContent=Math.abs(dev)<.01?'Sem diferença neste mês':dev>0?'Diego devolve ao Andrey':'Andrey devolve ao Diego';$('acV').textContent=(o.falta.length?'≈ ':'')+brl2.format(Math.abs(dev));
+$('acRows').innerHTML=all.map(x=>`<div class="acl"><span>${esc(x.nome)}, ${esc(NOME[x.w]||'')}</span><span>${esc(brl2.format(x.v))}</span></div>`).join('')+o.falta.map(x=>`<div class="acl"><span>${esc(P[x.p].curto+' · '+x.d)}, ${esc(NOME[quem(x.p,'auto')]||'')}</span><span class="aw">aguardando boleto</span></div>`).join('')+(espera?'':`<div class="acl"><span>Metade para cada um</span><span>${esc(brl2.format((a+d)/2))}</span></div>`);
+const qf=[...new Set(o.falta.map(x=>P[x.p].curto))].join(' e ');$('acL').textContent=espera?'A diferença sai quando o boleto do '+qf+' de '+fm(m)+' for lançado':Math.abs(dev)<.01?'Sem diferença neste mês':dev>0?'Diego devolve ao Andrey':'Andrey devolve ao Diego';$('acV').textContent=espera?'·':brl2.format(Math.abs(dev));
+const outros=(LASTR||calc()).ac.lista.filter(x=>x.m!==m&&!x.falta.length&&x.saldo>=.01).sort((x,y)=>x.m<y.m?-1:1);const tot=outros.reduce((t,x)=>t+(x.dev>0?1:-1)*x.saldo,0);$('acOut').textContent=Math.abs(tot)>=.01?(tot>0?'O Diego ainda deve ':'O Andrey ainda deve ')+brl2.format(Math.abs(tot))+' de outros meses ('+outros.map(x=>fm(x.m).slice(0,3)+'/'+x.m.slice(2,4)).join(', ')+').':'';
 $('acOkL').textContent=dev>=0?'Diego já devolveu a diferença':'Andrey já devolveu a diferença';
 const k=acertos[m];if(!acTouch){$('acOk').checked=!!(k&&k.ok);$('acDt').value=k&&k.ok?k.data||HOJED:HOJED;$('acRv').value=nf2.format(k&&k.ok?num(k.valor):Math.abs(dev))}
 else if(!$('acOk').checked)$('acRv').value=nf2.format(Math.abs(dev));
-$('acDtW').style.display=$('acOk').checked?'':'none';$('acOk').disabled=Math.abs(dev)<.01&&!(k&&k.ok);box.dataset.m=m;box.dataset.dev=Math.abs(dev);box.dataset.est=o.falta.length?'1':''};
+$('acDtW').style.display=$('acOk').checked?'':'none';$('acOk').disabled=(espera||Math.abs(dev)<.01)&&!(k&&k.ok);box.dataset.m=m;box.dataset.dev=Math.abs(dev);box.dataset.est=o.falta.length?'1':''};
 ['fVal','fData','fQuem','fProp','fDesc'].forEach(i=>$(i).addEventListener('input',acPreview));
 $('acOk').addEventListener('change',()=>{acTouch=true;acPreview()});
 $('acRv').addEventListener('input',()=>{acTouch=true});
