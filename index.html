@@ -135,7 +135,7 @@ textarea{height:72px;padding:10px 12px;resize:vertical}
 .bar .v small{display:block;font:13px Inter,sans-serif;color:var(--mute)}
 .leg{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--mute);margin-top:16px}
 .leg i{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:6px}
-.cen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.cen{display:grid;grid-template-columns:repeat(auto-fit,minmax(15em,1fr));gap:16px;margin-top:28px}
 .cen .card{padding:18px 22px}
 .cen b{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px;white-space:nowrap}
 .cen p{margin:2px 0 0;color:var(--mute);font-size:14px}
@@ -224,6 +224,11 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .lb .xbtn,.lb .pbtn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
 .lb .pbtn.warn{border-color:#ff6b63;color:#ff6b63}
 .up{font-size:13px;color:var(--mute);margin:10px 0 0}
+.bar.tot{border-top:1px solid var(--line);padding-top:18px;margin-top:4px}
+.bar.tot .tl{font-weight:600;font-size:15px}
+.eq{display:grid;gap:5px;align-content:center;height:30px}.eq i{display:block;height:2px;background:var(--ink);opacity:.8}
+.bar.tot .v{font-size:32px}
+mark.hl{color:#111;background:linear-gradient(100deg,#ffd633 0%,#ffe066 50%,#ffd84d 100%);padding:.1em .4em;border-radius:.5em .25em .55em .3em;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-weight:600}
 .dif .n{color:var(--red)}.dif small{max-width:22em}
 .aw{color:var(--mute)!important;font-style:italic}
 .acout{font-size:13px;color:var(--red);margin:8px 0 0}.acout:empty{display:none}
@@ -310,7 +315,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <p class="lead">Wave Residence e Elon Tower, comprados em sociedade por Andrey e Diego. Lance o que foi pago e veja quanto volta na venda antes das chaves.</p>
 <div class="live" aria-live="polite">
 <div><span class="n" id="hPago">R$ 0</span><small>pagos até hoje nos dois</small></div>
-<div><span class="n" id="hLucro">R$ 0</span><small>de lucro com 8% a 10% de valorização</small></div>
+<div><span class="n" id="hLucro">R$ 0</span><small id="hLucroL">de lucro com 8% a 10% de valorização</small></div>
 <div class="dif" id="hDifW" hidden><span class="n" id="hDif">R$ 0</span><small id="hDifL">de diferença que o Diego ainda não devolveu</small></div>
 </div>
 <div class="btns">
@@ -345,11 +350,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 
 <section class="blk" id="venda">
 <h2 class="serif">O que volta na <i>venda</i></h2>
-<p class="sub">Em Joinville, nos últimos 8 a 10 anos, o imóvel na planta valorizou em média de 8% a 10% da compra até a entrega das chaves. Na venda, vocês recebem de volta o que pagaram mais a valorização sobre o preço de compra.</p>
+<p class="sub">A valorização vem do Índice FipeZAP de Joinville dos últimos 12 meses e é atualizada sempre que o site abre. Na venda, vocês recebem de volta o que pagaram mais a valorização sobre o preço de compra. Os botões de 8% a 10% simulam a média histórica da compra na planta até as chaves.</p>
 <div class="ctl">
 <div><label for="val">Valorização sobre o preço de compra</label>
-<div class="vrow"><output id="valOut" for="val">8%</output><input id="val" type="range" min="0" max="15" step="0.5" value="8"></div>
-<div class="quick"><button class="pbtn" type="button" data-v="8">8%</button><button class="pbtn" type="button" data-v="9">9%</button><button class="pbtn" type="button" data-v="10">10%</button></div></div>
+<div class="vrow"><output id="valOut" for="val">8%</output><input id="val" type="range" min="0" max="15" step="0.01" value="8"></div>
+<p class="note" id="indNota" style="margin:6px 0 0"></p><div class="quick"><button class="pbtn go" type="button" id="indBtn" hidden>Índice de Joinville</button><button class="pbtn" type="button" data-v="8">8%</button><button class="pbtn" type="button" data-v="9">9%</button><button class="pbtn" type="button" data-v="10">10%</button></div></div>
 <div><label for="vendaM">Mês previsto da venda</label><select id="vendaM"></select></div>
 </div>
 <div class="kpis">
@@ -375,7 +380,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </div>
 </section>
 </main>
-<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 2.0 · 26/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
+<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 2.4 · 26/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dT">
 <form class="dlg" id="dlg" novalidate>
@@ -413,13 +418,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div class="gate on" id="gate" role="dialog" aria-modal="true" aria-labelledby="gT"><form class="gbox" id="gForm" novalidate>
 <h1 class="serif" id="gT">Planta &amp; <i>Parcela</i></h1><p class="sub" style="margin:0 0 18px">Wave Residence e Elon Tower</p>
 <label for="gPin" class="gl">PIN de acesso</label><input id="gPin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
-<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 2.0 · 26/11/2026</p></form></div>
+<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 2.4 · 26/11/2026</p></form></div>
 <div class="load" id="load" role="status" aria-live="polite"><div class="lbox">
 <svg class="lsvg" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><g stroke-width=".5" opacity=".35"><line x1="96.0" y1="56.0" x2="112.0" y2="56.0"/><line x1="95.6" y1="61.0" x2="111.5" y2="63.2"/><line x1="94.6" y1="65.9" x2="110.0" y2="70.3"/><line x1="92.9" y1="70.6" x2="107.5" y2="77.2"/><line x1="90.5" y1="75.1" x2="104.1" y2="83.6"/><line x1="87.6" y1="79.1" x2="99.8" y2="89.4"/><line x1="84.1" y1="82.8" x2="94.8" y2="94.6"/><line x1="80.1" y1="85.8" x2="89.1" y2="99.1"/><line x1="75.8" y1="88.4" x2="82.8" y2="102.7"/><line x1="71.1" y1="90.2" x2="76.1" y2="105.5"/><line x1="66.3" y1="91.5" x2="69.0" y2="107.2"/><line x1="61.3" y1="92.0" x2="61.8" y2="108.0"/><line x1="56.2" y1="91.8" x2="54.6" y2="107.7"/><line x1="51.3" y1="90.9" x2="47.4" y2="106.5"/><line x1="46.5" y1="89.4" x2="40.5" y2="104.2"/><line x1="42.0" y1="87.2" x2="34.0" y2="101.0"/><line x1="37.8" y1="84.4" x2="28.0" y2="97.0"/><line x1="34.1" y1="81.0" x2="22.6" y2="92.1"/><line x1="30.9" y1="77.2" x2="17.9" y2="86.6"/><line x1="28.2" y1="72.9" x2="14.1" y2="80.4"/><line x1="26.2" y1="68.3" x2="11.1" y2="73.8"/><line x1="24.8" y1="63.5" x2="9.1" y2="66.8"/><line x1="24.1" y1="58.5" x2="8.1" y2="59.6"/><line x1="24.1" y1="53.5" x2="8.1" y2="52.4"/><line x1="24.8" y1="48.5" x2="9.1" y2="45.2"/><line x1="26.2" y1="43.7" x2="11.1" y2="38.2"/><line x1="28.2" y1="39.1" x2="14.1" y2="31.6"/><line x1="30.9" y1="34.8" x2="17.9" y2="25.4"/><line x1="34.1" y1="31.0" x2="22.6" y2="19.9"/><line x1="37.8" y1="27.6" x2="28.0" y2="15.0"/><line x1="42.0" y1="24.8" x2="34.0" y2="11.0"/><line x1="46.5" y1="22.6" x2="40.5" y2="7.8"/><line x1="51.3" y1="21.1" x2="47.4" y2="5.5"/><line x1="56.2" y1="20.2" x2="54.6" y2="4.3"/><line x1="61.3" y1="20.0" x2="61.8" y2="4.0"/><line x1="66.3" y1="20.5" x2="69.0" y2="4.8"/><line x1="71.1" y1="21.8" x2="76.1" y2="6.5"/><line x1="75.8" y1="23.6" x2="82.8" y2="9.3"/><line x1="80.1" y1="26.2" x2="89.1" y2="12.9"/><line x1="84.1" y1="29.2" x2="94.8" y2="17.4"/><line x1="87.6" y1="32.9" x2="99.8" y2="22.6"/><line x1="90.5" y1="36.9" x2="104.1" y2="28.4"/><line x1="92.9" y1="41.4" x2="107.5" y2="34.8"/><line x1="94.6" y1="46.1" x2="110.0" y2="41.7"/><line x1="95.6" y1="51.0" x2="111.5" y2="48.8"/></g>
 <rect x="22" y="34" width="36" height="72" fill="var(--bg)" stroke-width="1.2"/><rect x="20" y="30" width="40" height="4" fill="var(--bg)" stroke-width="1"/>
 <path d="M78 8l1.6-6 1.6 6z" stroke-width=".8"/><rect x="72" y="8" width="14" height="4" fill="var(--bg)" stroke-width=".9"/><rect x="66" y="12" width="26" height="94" fill="var(--bg)" stroke-width="1.2"/>
 <g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
-<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 2.0 · 26/11/2026</p></div></div>
+<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 2.4 · 26/11/2026</p></div></div>
 <div class="ov" id="ovL" role="dialog" aria-modal="true" aria-labelledby="lT"><div class="dlg dlgL"><h3 id="lT">Ler comprovantes</h3>
 <p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. Quando a leitura bate com uma parcela, ela já é lançada sozinha. O que ficar em dúvida aparece aqui para você conferir.</p>
 <label class="drop" id="lDrop"><input type="file" id="lFile" accept="application/pdf,image/*,.pdf" multiple hidden><span>Arraste os arquivos aqui ou <b>escolha no computador</b></span></label>
@@ -433,7 +438,7 @@ const $=id=>document.getElementById(id);
 const brl=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
 const brl2=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
 const nf2=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pctf=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});
+const pctf=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1});const p2=new Intl.NumberFormat('pt-BR',{maximumFractionDigits:2});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const r2=v=>Math.round(v*100)/100;
 const num=v=>{let s=String(v??'').trim().replace(/[^\d,.\-]/g,'');if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');const x=parseFloat(s);return isFinite(x)?x:0};
@@ -464,7 +469,7 @@ return L.sort((a,b)=>a.p!==b.p?(a.p<b.p?1:-1):((!!a.chave)-(!!b.chave))||((a.m||
 const ITEM=Object.fromEntries(CRON.map(c=>[c.id,c]));
 
 const DEF={val:8,venda:'2028-07',resp:{wave:'andrey',elon:'diego'}};
-const VERSAO='2.0';
+const VERSAO='2.4';
 const API_URL='https://script.google.com/macros/s/AKfycbzfrpGoM-oHz4pOIceDzqyn-Q5yRWOX83nXJSl9yJzLdas0BoGHW-cn1GsLTCb8Puf9/exec';
 const LK='planta-parcela-cache-v1';
 const FDEF={
@@ -475,11 +480,11 @@ elon:{valor:315000,tabela:'',compra:'2026-04-16',conclusao:'',entrega:'',incorpo
 condicoes:'Entrada (sinal) de R$ 5.000, 38 mensais de R$ 868,50, balões de R$ 5.000 (dez/2026), R$ 10.000 (dez/2027) e R$ 10.000 (dez/2028) e R$ 251.997 de saldo a financiar.\nValores corrigidos pelo CUB até a assinatura do compromisso.',
 regras:'O compromisso de compra e venda ainda depende do registro da incorporação. Confirmar com a incorporadora as regras e a taxa de cessão antes de anunciar a venda.',obs:''}};
 const FKEYS=[['valor','Valor em contrato (R$)','n'],['tabela','Valor de tabela (R$)','n'],['compra','Data da compra','d'],['conclusao','Conclusão da obra','d'],['entrega','Entrega das chaves','d'],['incorporadora','Incorporadora','t'],['endereco','Endereço','t'],['unidade','Unidade','t'],['area','Área privativa','t'],['titular','Titular do contrato','t'],['documento','Documento','t'],['indice','Índice de correção','t'],['mercado','Valor de mercado atual (R$)','n'],['mercadoData','Data do valor de mercado','d'],['condicoes','Condições de pagamento','a'],['regras','Regras para vender antes das chaves','a'],['obs','Observações','a']];
-let acertos={},aTodos=false;
+let acertos={},aTodos=false,IND=null;
 let imv={wave:{},elon:{}},sheetId=null,editing=false,LASTR=null,lbList=[],lbI=0;
 const F=id=>Object.assign({fotos:[],docs:[]},FDEF[id],imv[id]||{});
 let pagos={},cfg=JSON.parse(JSON.stringify(DEF)),db=null,todas={wave:false,elon:false},editId=null,undo=null;
-const fixCfg=c=>({val:isFinite(+c.val)?Math.min(15,Math.max(0,+c.val)):8,venda:/^\d{4}-\d{2}$/.test(c.venda||'')?c.venda:DEF.venda,resp:Object.assign({},DEF.resp,c.resp||{})});
+const fixCfg=c=>({manual:false,val:isFinite(+c.val)?Math.min(15,Math.max(0,+c.val)):8,venda:/^\d{4}-\d{2}$/.test(c.venda||'')?c.venda:DEF.venda,resp:Object.assign({},DEF.resp,c.resp||{})});
 try{const s=JSON.parse(localStorage.getItem(LK));if(s){pagos=s.pagos||{};cfg=fixCfg(s.cfg||{});if(s.imv)imv=Object.assign({wave:{},elon:{}},s.imv);if(s.acertos)acertos=s.acertos}}catch(e){}
 const saveLocal=()=>{try{localStorage.setItem(LK,JSON.stringify({pagos,cfg,imv,acertos}))}catch(e){}};
 
@@ -533,15 +538,16 @@ PROPS.forEach(p=>p.preco=num(F(p.id).valor)||315000);
 const R=calc(),T=R.tot;LASTR=R;
 $('hPago').textContent=brl.format(T.pago);
 {const A=R.ac,ms=[...A.meses].sort();$('hDifW').hidden=Math.abs(A.pend)<.01;$('hDif').textContent=brl2.format(Math.abs(A.pend));$('hDifL').textContent=(A.pend>=0?'de diferença que o Diego ainda não devolveu':'de diferença que o Andrey ainda deve ao Diego')+(ms.length?', '+ms.map(x=>fm(x).slice(0,3)+'/'+x.slice(2,4)).join(', '):'')}
-$('hLucro').textContent=brl.format(T.preco*.08)+' a '+brl.format(T.preco*.10);
+if(IND){$('hLucro').textContent=brl.format(T.preco*IND.pct/100);$('hLucroL').textContent='de lucro com a valorização de Joinville em 12 meses, '+p2.format(IND.pct)+'%'}else{$('hLucro').textContent=brl.format(T.preco*.08)+' a '+brl.format(T.preco*.10);$('hLucroL').textContent='de lucro com 8% a 10% de valorização'}
+$('indBtn').hidden=!IND;$('indNota').textContent=IND?`Índice FipeZAP de Joinville: ${p2.format(IND.pct)}% nos 12 meses até ${IND.mes||'o último mês divulgado'}${IND.m2?', m² médio de '+brl.format(IND.m2):''}. ${IND.antigo?'Usando o último valor salvo, a fonte não respondeu agora.':'Atualizado ao abrir o site.'}${cfg.manual&&Math.abs(cfg.val-IND.pct)>.001?' Você está simulando outro valor.':''}`:'';
 $('strip').innerHTML=PROPS.map(p=>`<button class="sp open" type="button" data-open="${p.id}" aria-label="Abrir a ficha de ${esc(p.nome)}">${logo(p)}<span class="pc">${esc(pctf.format(R[p.id].pago/p.preco*100))}%<small>${esc(brl.format(R[p.id].pago))} pagos</small></span></button>`).join('');
 drawProps(R);
-$('val').value=cfg.val;$('valOut').textContent=pctf.format(cfg.val)+'%';$('vendaM').value=cfg.venda;
+$('val').value=cfg.val;$('valOut').textContent=p2.format(cfg.val)+'%';$('vendaM').value=cfg.venda;
 $('kPreco').textContent=brl.format(T.preco);$('kProj').textContent=brl.format(T.proj);$('kGanho').textContent='+ '+brl.format(T.ganho);$('kRet').textContent=brl.format(T.ret);
-$('kRoi').textContent=T.proj>0?`Vendendo em ${fm(cfg.venda)}, a valorização de ${pctf.format(cfg.val)}% sobre o preço de compra dá ${pctf.format(T.ganho/T.proj*100)}% de lucro sobre o que vocês terão colocado.`:'';
+$('kRoi').textContent=T.proj>0?`Vendendo em ${fm(cfg.venda)}, a valorização de ${p2.format(cfg.val)}% sobre o preço de compra dá ${pctf.format(T.ganho/T.proj*100)}% de lucro sobre o que vocês terão colocado.`:'';
 const mx=Math.max(1,...PROPS.map(p=>R[p.id].ret));
-$('bars').innerHTML=PROPS.map(p=>{const o=R[p.id];return `<div class="bar">${logo(p,true)}<div class="track"><i class="p" style="width:${(o.proj/mx*100).toFixed(2)}%"></i><i class="g" style="width:${(o.ganho/mx*100).toFixed(2)}%"></i></div><span class="v">${esc(brl.format(o.ret))}<small>${esc(brl.format(o.proj))} + ${esc(brl.format(o.ganho))}</small></span></div>`}).join('');
-$('cen').innerHTML=[8,10].map(v=>{const g=T.preco*v/100;return `<div class="card"><p>Com ${v}% de valorização</p><b>${esc(brl.format(g))}</b><p>de lucro, ${esc(brl.format(g/2))} para cada um. Volta ${esc(brl.format(T.proj+g))} na venda.</p></div>`}).join('');
+$('bars').innerHTML=PROPS.map(p=>{const o=R[p.id];return `<div class="bar">${logo(p,true)}<div class="track"><i class="p" style="width:${(o.proj/mx*100).toFixed(2)}%"></i><i class="g" style="width:${(o.ganho/mx*100).toFixed(2)}%"></i></div><span class="v">${esc(brl.format(o.ret))}<small>${esc(brl.format(o.proj))} + ${esc(brl.format(o.ganho))}</small></span></div>`}).join('');$('bars').insertAdjacentHTML('beforeend',`<div class="bar tot"><span class="tl">Os dois imóveis</span><div class="eq" aria-hidden="true"><i></i><i></i></div><span class="v">= ${esc(brl.format(T.ret))}<small>${esc(brl.format(T.proj))} + ${esc(brl.format(T.ganho))}</small></span></div>`);
+$('cen').innerHTML=(IND?[IND.pct,8,10]:[8,10]).map((v,ix)=>{const g=T.preco*v/100;return `<div class="card"><p>${IND&&ix===0?'Pelo índice de Joinville, '+esc(p2.format(v))+'%':'Com '+v+'% de valorização'}</p><b>${esc(brl.format(g))}</b><p>de lucro, <mark class="hl">${esc(brl.format(g/2))} para cada um</mark>. Volta ${esc(brl.format(T.proj+g))} na venda.</p></div>`}).join('');
 const A=R.ac;
 if($('acerto')){$('aPendL').textContent=A.pend<0?'A devolver ao Diego':'A receber do Diego';$('aPend').textContent=brl2.format(Math.abs(A.pend));$('aOk').textContent=brl2.format(Math.abs(A.ok));$('aN').textContent=A.n;
 const lst=A.lista.filter(o=>Math.abs(o.dev)>=.01||o.falta.length),vis=aTodos?lst:lst.slice(0,6);
@@ -602,7 +608,7 @@ const all=o.it;const espera=o.falta.length>0;let a=0,d=0;all.forEach(x=>{if(x.w=
 $('acT').textContent='Reembolso da diferença, '+fm(m);
 $('acRows').innerHTML=all.map(x=>`<div class="acl"><span>${esc(x.nome)}, ${esc(NOME[x.w]||'')}</span><span>${esc(brl2.format(x.v))}</span></div>`).join('')+o.falta.map(x=>`<div class="acl"><span>${esc(P[x.p].curto+' · '+x.d)}, ${esc(NOME[quem(x.p,'auto')]||'')}</span><span class="aw">aguardando boleto</span></div>`).join('')+(espera?'':`<div class="acl"><span>Metade para cada um</span><span>${esc(brl2.format((a+d)/2))}</span></div>`);
 const qf=[...new Set(o.falta.map(x=>P[x.p].curto))].join(' e ');$('acL').textContent=espera?'A diferença sai quando o boleto do '+qf+' de '+fm(m)+' for lançado':Math.abs(dev)<.01?'Sem diferença neste mês':dev>0?'Diego devolve ao Andrey':'Andrey devolve ao Diego';$('acV').textContent=espera?'·':brl2.format(Math.abs(dev));
-const outros=(LASTR||calc()).ac.lista.filter(x=>x.m!==m&&!x.falta.length&&x.saldo>=.01).sort((x,y)=>x.m<y.m?-1:1);const tot=outros.reduce((t,x)=>t+(x.dev>0?1:-1)*x.saldo,0);$('acOut').textContent=Math.abs(tot)>=.01?(tot>0?'O Diego ainda deve ':'O Andrey ainda deve ')+brl2.format(Math.abs(tot))+' de outros meses ('+outros.map(x=>fm(x.m).slice(0,3)+'/'+x.m.slice(2,4)).join(', ')+').':'';
+const outros=(LASTR||calc()).ac.lista.filter(x=>x.m!==m&&!x.falta.length&&x.saldo>=.01).sort((x,y)=>x.m<y.m?-1:1);const tot=outros.reduce((t,x)=>t+(x.dev>0?1:-1)*x.saldo,0);$('acOut').textContent=Math.abs(tot)>=.01?(tot>0?'O Diego ainda deve ':'O Andrey ainda deve ')+brl2.format(Math.abs(tot))+' de outros meses ('+outros.map(x=>fm(x.m).slice(0,3)+'/'+x.m.slice(2,4)+' '+brl2.format(x.saldo)).join(', ')+'). Cada mês é metade da diferença entre o boleto do Wave e o do Elon daquele mês.':'';
 $('acOkL').textContent=dev>=0?'Diego já devolveu a diferença':'Andrey já devolveu a diferença';
 const k=acertos[m];if(!acTouch){$('acOk').checked=!!(k&&k.ok);$('acDt').value=k&&k.ok?k.data||HOJED:HOJED;$('acRv').value=nf2.format(k&&k.ok?num(k.valor):Math.abs(dev))}
 else if(!$('acOk').checked)$('acRv').value=nf2.format(Math.abs(dev));
@@ -630,8 +636,9 @@ $('tUndo').addEventListener('click',()=>{const u=undo;undo=null;$('toast').class
 $('props').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
 if(b.dataset.open)openSheet(b.dataset.open);else if(b.dataset.ed)openDlg(b.dataset.ed);else if(b.dataset.all){todas[b.dataset.all]=!todas[b.dataset.all];render()}else if(b.dataset.new)openDlg(null,b.dataset.new)});
 $('hPagar').addEventListener('click',()=>{const c=CRON.filter(x=>!x.chave&&!pagos[x.id]).sort((a,b)=>a.m<b.m?-1:a.m>b.m?1:0)[0];if(c)openDlg(c.id);else openDlg(null,'wave')});
-$('val').addEventListener('input',e=>{cfg.val=+e.target.value;putCfg()});
-document.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>{cfg.val=+b.dataset.v;putCfg()}));
+$('val').addEventListener('input',e=>{cfg.val=+e.target.value;cfg.manual=true;putCfg()});
+document.querySelectorAll('[data-v]').forEach(b=>b.addEventListener('click',()=>{cfg.val=+b.dataset.v;cfg.manual=true;putCfg()}));
+$('indBtn').addEventListener('click',()=>{if(!IND)return;cfg.val=Math.round(+IND.pct*100)/100;cfg.manual=false;putCfg()});
 $('vendaM').addEventListener('change',e=>{cfg.venda=e.target.value;putCfg()});
 $('rWave').addEventListener('change',e=>{cfg.resp.wave=e.target.value;putCfg()});
 $('rElon').addEventListener('change',e=>{cfg.resp.elon=e.target.value;putCfg()});
@@ -745,11 +752,11 @@ for(let r=60;r<=110;r+=7)g+=`<circle cx="260" cy="200" r="${r}" stroke-width=".7
 let t=`<rect x="20" y="562" width="480" height="38" fill="url(#hh)"/><rect x="20" y="562" width="480" height="38" fill="none"/><rect x="36" y="544" width="448" height="18"/><rect x="36" y="553" width="448" height="9" fill="url(#hd)" stroke="none"/>`;
 /* Wave, varandas curvas */
 t+=`<rect x="58" y="136" width="184" height="14" stroke-width="1.4"/><rect x="66" y="150" width="168" height="394" stroke-width="1.3"/><rect x="176" y="150" width="58" height="394" fill="url(#hx)" stroke="none"/>`;
-for(let y=176;y<540;y+=26){t+=`<rect x="78" y="${y-20}" width="144" height="14" fill="url(#hd)" stroke-width=".6"/><rect class="lamp" x="79" y="${y-19}" width="142" height="12"/>`;const w=k=>{let d=`M60 ${y+k}`;for(let x=60;x<240;x+=45)d+=' q22.5 -9 45 0';return d};t+=`<path d="${w(0)} v5 H60 z" fill="var(--bg)" stroke-width="1.2"/><path d="${w(5)}" fill="none" stroke-width="1"/>`}
+for(let y=176;y<540;y+=26){t+=`<rect x="78" y="${y-20}" width="144" height="14" fill="url(#hd)" stroke-width=".6"/>`+[0,1,2,3].map(k=>`<rect class="lamp" x="${80+k*35.5}" y="${y-19}" width="33" height="12"/>`).join('')+'';const w=k=>{let d=`M60 ${y+k}`;for(let x=60;x<240;x+=45)d+=' q22.5 -9 45 0';return d};t+=`<path d="${w(0)} v5 H60 z" fill="var(--bg)" stroke-width="1.2"/><path d="${w(5)}" fill="none" stroke-width="1"/>`}
 t+=`<rect x="128" y="508" width="44" height="36" fill="var(--bg)" stroke-width="1.2"/><line x1="150" y1="508" x2="150" y2="544" stroke-width=".8"/>`;
 /* Elon, aletas verticais */
 t+=`<path d="M340 44l6-24 6 24z" stroke-width="1.2"/><rect x="318" y="44" width="56" height="16" stroke-width="1.2"/><rect x="290" y="60" width="112" height="18" stroke-width="1.4"/><rect x="298" y="78" width="96" height="466" stroke-width="1.3"/><rect x="356" y="78" width="38" height="466" fill="url(#hx)" stroke="none"/>`;
-for(let y=96;y<536;y+=22)t+=`<rect x="306" y="${y}" width="80" height="12" fill="url(#hh)" stroke-width=".6"/><rect class="lamp" x="307" y="${y+1}" width="78" height="10"/>`;
+for(let y=96;y<536;y+=22)t+=`<rect x="306" y="${y}" width="80" height="12" fill="url(#hh)" stroke-width=".6"/>`+[[307,313],[315,329],[331,345],[347,361],[363,377],[379,385]].map(([a,b])=>`<rect class="lamp" x="${a}" y="${y+1}" width="${b-a}" height="10"/>`).join('')+'';
 for(let x=298;x<=394;x+=16)t+=`<line x1="${x}" y1="78" x2="${x}" y2="544" stroke-width="${x===298||x===394?1.3:.9}"/>`;
 t+=`<rect x="326" y="510" width="40" height="34" fill="var(--bg)" stroke-width="1.2"/><line x1="346" y1="510" x2="346" y2="544" stroke-width=".8"/>`;
 /* árvores baixas */
@@ -759,11 +766,12 @@ $('towers').innerHTML=t}
 /* modo claro e escuro */
 $('temaBtn').addEventListener('click',()=>{const r=document.documentElement,atual=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'),novo=atual==='dark'?'light':'dark';r.dataset.theme=novo;try{localStorage.setItem('pp_tema',novo)}catch(e){}$('temaBtn').setAttribute('aria-pressed',novo==='dark'?'true':'false')});
 /* luzes que acendem com o mouse */
-const lights=(svg,rx,ry)=>{const L=[...svg.querySelectorAll('.lamp')].map(el=>{const b=el.getBBox();return {el,x:b.x+b.width/2,y:b.y+b.height/2,w:b.width/2}});
-const mv=e=>{const m=svg.getScreenCTM();if(!m)return;const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());
-L.forEach(l=>{const dx=Math.max(0,Math.abs(pt.x-l.x)-l.w)/rx,dy=(pt.y-l.y)/ry,o=Math.max(0,Math.min(1,1.25-Math.hypot(dx,dy)));if(o>0){l.el.style.transition='opacity .15s ease';l.el.style.opacity=Math.max(o,+l.el.style.opacity||0)}else if(+l.el.style.opacity){l.el.style.transition='opacity 1.4s ease';l.el.style.opacity=0}})};
-const out=()=>L.forEach(l=>{l.el.style.transition='opacity 1.6s ease';l.el.style.opacity=0});
-svg.addEventListener('pointermove',mv);svg.addEventListener('pointerdown',mv);svg.addEventListener('pointerleave',out)};
+const lights=(svg,tol)=>{const L=[...svg.querySelectorAll('.lamp')].filter(el=>+el.getAttribute('width')>0).map(el=>{const b=el.getBBox();return {el,x0:b.x,y0:b.y,x1:b.x+b.width,y1:b.y+b.height}});let cur=null;
+const apaga=l=>{l.el.style.transition='opacity 1.6s ease';l.el.style.opacity=0};
+const mv=e=>{const m=svg.getScreenCTM();if(!m)return;const pt=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());let best=null,bd=1e9;
+L.forEach(l=>{const dx=Math.max(l.x0-pt.x,0,pt.x-l.x1),dy=Math.max(l.y0-pt.y,0,pt.y-l.y1),d=Math.hypot(dx,dy);if(d<bd){bd=d;best=l}});
+const alvo=bd<=tol?best:null;if(alvo===cur)return;if(cur)apaga(cur);cur=alvo;if(alvo){alvo.el.style.transition='opacity .12s ease';alvo.el.style.opacity=1}};
+svg.addEventListener('pointermove',mv);svg.addEventListener('pointerdown',mv);svg.addEventListener('pointerleave',()=>{if(cur)apaga(cur);cur=null})};
 {let a=11;const rnd=()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
 const R=(m,n)=>m+rnd()*(n-m),I=(m,n)=>Math.floor(R(m,n+1)),W=2400,G=112,CX=1200;let k='<g stroke="var(--ink)" fill="none">';
 /* raios atrás das torres */
@@ -796,9 +804,9 @@ if(rnd()<.35){k+=arvore(x+2);x+=10}}
 /* Wave e Elon */
 k+=`<rect x="${CX-108}" y="${G-6}" width="250" height="6" fill="url(#hd)" stroke-width=".8"/>`;
 const wx=CX-96,wt=G-74;k+=`<rect x="${wx-6}" y="${wt-8}" width="102" height="8" fill="var(--bg)" stroke-width="1.1"/><rect x="${wx}" y="${wt}" width="90" height="${74-6}" fill="var(--bg)" stroke-width="1.1"/><rect x="${wx+60}" y="${wt}" width="30" height="${68}" fill="url(#hx)" stroke="none" opacity=".55"/>`;
-for(let y=wt+12;y<G-8;y+=12){k+=`<rect x="${wx+8}" y="${y-9}" width="74" height="6" fill="url(#hd)" stroke-width=".4" opacity=".7"/><rect class="lamp" x="${wx+8}" y="${y-9}" width="74" height="6"/>`;let q=`M${wx-4} ${y}`;for(let z=0;z<4;z++)q+=' q12.25 -4 24.5 0';k+=`<path d="${q} v2.5 H${wx-4}z" fill="var(--bg)" stroke-width=".9"/>`}
+for(let y=wt+12;y<G-8;y+=12){k+=`<rect x="${wx+8}" y="${y-9}" width="74" height="6" fill="url(#hd)" stroke-width=".4" opacity=".7"/>`+[0,1,2,3].map(z=>`<rect class="lamp" x="${wx+9+z*18.5}" y="${y-9}" width="17" height="6"/>`).join('')+'';let q=`M${wx-4} ${y}`;for(let z=0;z<4;z++)q+=' q12.25 -4 24.5 0';k+=`<path d="${q} v2.5 H${wx-4}z" fill="var(--bg)" stroke-width=".9"/>`}
 const ex=CX+18,et=G-100;k+=`<path d="M${ex+29} ${et-24}l3-14 3 14z" stroke-width=".9"/><rect x="${ex+16}" y="${et-24}" width="32" height="10" fill="var(--bg)" stroke-width=".9"/><rect x="${ex+4}" y="${et-14}" width="56" height="14" fill="var(--bg)" stroke-width="1.1"/><rect x="${ex+8}" y="${et}" width="48" height="${100-6}" fill="var(--bg)" stroke-width="1.1"/><rect x="${ex+38}" y="${et}" width="18" height="94" fill="url(#hx)" stroke="none" opacity=".55"/>`;
-for(let y=et+8;y<G-12;y+=10)k+=`<rect x="${ex+12}" y="${y}" width="40" height="5" fill="url(#hh)" stroke-width=".4"/><rect class="lamp" x="${ex+12}" y="${y}" width="40" height="5"/>`;
+for(let y=et+8;y<G-12;y+=10)k+=`<rect x="${ex+12}" y="${y}" width="40" height="5" fill="url(#hh)" stroke-width=".4"/>`+[[ex+12,ex+16],[ex+17,ex+24],[ex+25,ex+32],[ex+33,ex+40],[ex+41,ex+48],[ex+49,ex+52]].map(([a,b])=>`<rect class="lamp" x="${a}" y="${y}" width="${b-a}" height="5"/>`).join('')+'';
 for(let z=ex+8;z<=ex+56;z+=8)k+=`<line x1="${z}" y1="${et}" x2="${z}" y2="${G-6}" stroke-width=".6"/>`;
 k+=arvore(CX-118)+arvore(CX+92)+arvore(CX+150);
 /* rua e rio com reflexo */
@@ -807,7 +815,7 @@ for(let x=4;x<W;x+=26)k+=`<line x1="${x}" y1="${G}" x2="${x}" y2="${G+4}" stroke
 refl.concat([[wx,90,74],[ex+8,48,100]]).forEach(([x,w,h])=>{for(let z=x+2;z<x+w-2;z+=4){const L=Math.min(16,h*.2)*R(.4,1);k+=`<line x1="${z}" y1="${G+8}" x2="${z}" y2="${(G+8+L).toFixed(1)}" stroke-width=".5" opacity=".22"/>`}});
 for(let y=G+9;y<150;y+=6){let q=`M${-R(0,30)} ${y}`;for(let z=0;z<W+60;z+=34)q+=` q8.5 ${-R(1,2.2).toFixed(1)} 17 0 t17 0`;k+=`<path d="${q}" stroke-width=".55" opacity="${(.6-(y-G)/80).toFixed(2)}"/>`}
 $('sky').innerHTML=k+'</g>'}
-requestAnimationFrame(()=>{try{lights(document.querySelector('.art svg'),110,46);lights($('sky'),30,26)}catch(e){}});
+requestAnimationFrame(()=>{try{lights(document.querySelector('.art svg'),2);lights($('sky'),5)}catch(e){}});
 
 /* linhas de fundo que seguem a página toda e se desenham com a rolagem */
 {const svg=$('bgr');let anim=[],busy=false,lastW=0,lastH=0;
@@ -917,7 +925,8 @@ const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;c
 const j=await r.json();if(!j||!j.ok)throw j||{erro:'resposta'};return j};
 const falha=e=>{if(e&&e.erro==='pin'){sair('O PIN mudou. Digite de novo.');return}setSync('Sem conexão');toast('Não foi possível salvar na planilha. Confira a internet e tente de novo.')};
 const aplicar=d=>{if(!d)return;pagos={};Object.entries(d.pagos||{}).forEach(([k,v])=>{if(v&&(ITEM[k]||v.extra))pagos[k]=v});acertos=d.acertos||{};
-imv=Object.assign({wave:{},elon:{}},d.imoveis||{});if(d.config&&Object.keys(d.config).length)cfg=fixCfg(d.config);saveLocal()};
+imv=Object.assign({wave:{},elon:{}},d.imoveis||{});if(d.config&&Object.keys(d.config).length)cfg=fixCfg(d.config);
+if(d.indice&&isFinite(+d.indice.pct)){const novo=!IND;IND=d.indice;if(novo||!cfg.manual)cfg.val=Math.round(+IND.pct*100)/100}saveLocal()};
 let carregando=false;
 const carregar=async(silencioso)=>{if(carregando)return;carregando=true;if(!silencioso)setSync('Carregando');
 try{const j=await api('all');if(!$('ov').classList.contains('on')&&!editing){aplicar(j.data);render()}setSync('Sincronizado',true);return true}
