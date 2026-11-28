@@ -241,6 +241,7 @@ a.pbtn{display:inline-grid;place-items:center;text-decoration:none}
 .eq{display:grid;gap:5px;align-content:center;height:30px}.eq i{display:block;height:2px;background:var(--ink);opacity:.8}
 .bar.tot .v{font-size:32px}
 mark.hl{color:#111;background:linear-gradient(100deg,#ffd633 0%,#ffe066 50%,#ffd84d 100%);padding:.1em .4em;border-radius:.5em .25em .55em .3em;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-weight:600}
+.pasta{margin-top:22px;border:1px solid var(--line,rgba(127,127,127,.3));border-radius:14px;padding:14px 16px;max-width:560px}.pasta[hidden],.pasta [hidden]{display:none}.pasta.vazio{border:0;padding:0}.pasta.vazio .rodape{margin-top:0}.pasta h4{margin:0 0 8px;font:600 14px Inter,sans-serif}.pasta ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.pasta li{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:13px}.pasta li small{display:block;opacity:.7}.pasta li span{min-width:0;overflow-wrap:anywhere}.pasta .pb{display:flex;gap:6px;flex:none}.pasta .rodape{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:12px;opacity:.85}
 .dif .n{color:var(--red)}.dif small{max-width:22em}
 .aw{color:var(--mute)!important;font-style:italic}
 .acout{font-size:13px;color:var(--red);margin:8px 0 0}.acout:empty{display:none}
@@ -335,6 +336,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <button class="btn blue" id="hPagar" type="button">Lançar parcela <span class="ar" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
 <button class="btn out" type="button" data-ler>Ler comprovantes</button>
 </div>
+<div class="pasta vazio" id="pasta"><h4 id="pastaT">Comprovantes da pasta para conferir</h4><ul id="pastaL"></ul><div class="rodape"><button class="btn out sm" id="pastaBtn" type="button">Ler a pasta agora</button><span id="pastaM">A pasta do Drive é lida sozinha de hora em hora.</span></div></div>
 </div>
 <div class="art" aria-hidden="true">
 <svg viewBox="0 -50 520 650" preserveAspectRatio="xMidYMax meet">
@@ -394,7 +396,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 </div>
 </section>
 </main>
-<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 2.8 · 26/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
+<footer><svg class="skyline" id="sky" viewBox="0 -18 2400 168" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg><div class="wrap fw2"><div class="fr"><span id="foot">Dados salvos na planilha Planta &amp; Parcela no Google Drive. Comprovantes e contratos ficam na pasta do Drive.</span><span class="fr2"><span class="fv" id="versao">Versão 3.0 · 27/11/2026</span><button class="btn out sm" id="copy" type="button">Copiar pagamentos do ano</button></span></div></div></footer>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dT">
 <form class="dlg" id="dlg" novalidate>
@@ -432,13 +434,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
 <div class="gate on" id="gate" role="dialog" aria-modal="true" aria-labelledby="gT"><form class="gbox" id="gForm" novalidate>
 <h1 class="serif" id="gT">Planta &amp; <i>Parcela</i></h1><p class="sub" style="margin:0 0 18px">Wave Residence e Elon Tower</p>
 <label for="gPin" class="gl">PIN de acesso</label><input id="gPin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12">
-<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 2.8 · 26/11/2026</p></form></div>
+<button class="btn blue" id="gBtn" type="submit" style="width:100%;margin-top:14px">Entrar</button><p class="err" id="gE"></p><p class="fv" style="margin-top:18px">Versão 3.0 · 27/11/2026</p></form></div>
 <div class="load" id="load" role="status" aria-live="polite"><div class="lbox">
 <svg class="lsvg" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor"><g stroke-width=".5" opacity=".35"><line x1="96.0" y1="56.0" x2="112.0" y2="56.0"/><line x1="95.6" y1="61.0" x2="111.5" y2="63.2"/><line x1="94.6" y1="65.9" x2="110.0" y2="70.3"/><line x1="92.9" y1="70.6" x2="107.5" y2="77.2"/><line x1="90.5" y1="75.1" x2="104.1" y2="83.6"/><line x1="87.6" y1="79.1" x2="99.8" y2="89.4"/><line x1="84.1" y1="82.8" x2="94.8" y2="94.6"/><line x1="80.1" y1="85.8" x2="89.1" y2="99.1"/><line x1="75.8" y1="88.4" x2="82.8" y2="102.7"/><line x1="71.1" y1="90.2" x2="76.1" y2="105.5"/><line x1="66.3" y1="91.5" x2="69.0" y2="107.2"/><line x1="61.3" y1="92.0" x2="61.8" y2="108.0"/><line x1="56.2" y1="91.8" x2="54.6" y2="107.7"/><line x1="51.3" y1="90.9" x2="47.4" y2="106.5"/><line x1="46.5" y1="89.4" x2="40.5" y2="104.2"/><line x1="42.0" y1="87.2" x2="34.0" y2="101.0"/><line x1="37.8" y1="84.4" x2="28.0" y2="97.0"/><line x1="34.1" y1="81.0" x2="22.6" y2="92.1"/><line x1="30.9" y1="77.2" x2="17.9" y2="86.6"/><line x1="28.2" y1="72.9" x2="14.1" y2="80.4"/><line x1="26.2" y1="68.3" x2="11.1" y2="73.8"/><line x1="24.8" y1="63.5" x2="9.1" y2="66.8"/><line x1="24.1" y1="58.5" x2="8.1" y2="59.6"/><line x1="24.1" y1="53.5" x2="8.1" y2="52.4"/><line x1="24.8" y1="48.5" x2="9.1" y2="45.2"/><line x1="26.2" y1="43.7" x2="11.1" y2="38.2"/><line x1="28.2" y1="39.1" x2="14.1" y2="31.6"/><line x1="30.9" y1="34.8" x2="17.9" y2="25.4"/><line x1="34.1" y1="31.0" x2="22.6" y2="19.9"/><line x1="37.8" y1="27.6" x2="28.0" y2="15.0"/><line x1="42.0" y1="24.8" x2="34.0" y2="11.0"/><line x1="46.5" y1="22.6" x2="40.5" y2="7.8"/><line x1="51.3" y1="21.1" x2="47.4" y2="5.5"/><line x1="56.2" y1="20.2" x2="54.6" y2="4.3"/><line x1="61.3" y1="20.0" x2="61.8" y2="4.0"/><line x1="66.3" y1="20.5" x2="69.0" y2="4.8"/><line x1="71.1" y1="21.8" x2="76.1" y2="6.5"/><line x1="75.8" y1="23.6" x2="82.8" y2="9.3"/><line x1="80.1" y1="26.2" x2="89.1" y2="12.9"/><line x1="84.1" y1="29.2" x2="94.8" y2="17.4"/><line x1="87.6" y1="32.9" x2="99.8" y2="22.6"/><line x1="90.5" y1="36.9" x2="104.1" y2="28.4"/><line x1="92.9" y1="41.4" x2="107.5" y2="34.8"/><line x1="94.6" y1="46.1" x2="110.0" y2="41.7"/><line x1="95.6" y1="51.0" x2="111.5" y2="48.8"/></g>
 <rect x="22" y="34" width="36" height="72" fill="var(--bg)" stroke-width="1.2"/><rect x="20" y="30" width="40" height="4" fill="var(--bg)" stroke-width="1"/>
 <path d="M78 8l1.6-6 1.6 6z" stroke-width=".8"/><rect x="72" y="8" width="14" height="4" fill="var(--bg)" stroke-width=".9"/><rect x="66" y="12" width="26" height="94" fill="var(--bg)" stroke-width="1.2"/>
 <g stroke="none"><rect class="lf" x="27" y="98" width="26" height="4" style="animation-delay:0.00s"/><rect class="lf" x="27" y="90" width="26" height="4" style="animation-delay:0.12s"/><rect class="lf" x="27" y="82" width="26" height="4" style="animation-delay:0.24s"/><rect class="lf" x="27" y="74" width="26" height="4" style="animation-delay:0.36s"/><rect class="lf" x="27" y="66" width="26" height="4" style="animation-delay:0.48s"/><rect class="lf" x="27" y="58" width="26" height="4" style="animation-delay:0.60s"/><rect class="lf" x="27" y="50" width="26" height="4" style="animation-delay:0.72s"/><rect class="lf" x="27" y="42" width="26" height="4" style="animation-delay:0.84s"/><rect class="lf" x="27" y="34" width="26" height="4" style="animation-delay:0.96s"/><rect class="lf" x="69" y="98" width="20" height="3.5" style="animation-delay:0.06s"/><rect class="lf" x="69" y="91" width="20" height="3.5" style="animation-delay:0.16s"/><rect class="lf" x="69" y="84" width="20" height="3.5" style="animation-delay:0.26s"/><rect class="lf" x="69" y="77" width="20" height="3.5" style="animation-delay:0.36s"/><rect class="lf" x="69" y="70" width="20" height="3.5" style="animation-delay:0.46s"/><rect class="lf" x="69" y="63" width="20" height="3.5" style="animation-delay:0.56s"/><rect class="lf" x="69" y="56" width="20" height="3.5" style="animation-delay:0.66s"/><rect class="lf" x="69" y="49" width="20" height="3.5" style="animation-delay:0.76s"/><rect class="lf" x="69" y="42" width="20" height="3.5" style="animation-delay:0.86s"/><rect class="lf" x="69" y="35" width="20" height="3.5" style="animation-delay:0.96s"/><rect class="lf" x="69" y="28" width="20" height="3.5" style="animation-delay:1.06s"/><rect class="lf" x="69" y="21" width="20" height="3.5" style="animation-delay:1.16s"/></g><line x1="8" y1="106" x2="112" y2="106" stroke-width="1.4"/><line x1="14" y1="110" x2="106" y2="110" stroke-width=".6"/></g></svg>
-<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 2.8 · 26/11/2026</p></div></div>
+<p class="lt serif">Planta &amp; <i>Parcela</i></p><p class="ls" id="loadT">Carregando as parcelas</p><div class="lbar"><i></i></div><p class="fv" style="display:inline-block;margin:16px 0 0">Versão 3.0 · 27/11/2026</p></div></div>
 <div class="ov" id="ovL" role="dialog" aria-modal="true" aria-labelledby="lT"><div class="dlg dlgL"><h3 id="lT">Ler comprovantes</h3>
 <p class="hint">Anexe os comprovantes em PDF ou foto, um ou vários de uma vez. Quando a leitura bate com uma parcela, ela já é lançada sozinha. O que ficar em dúvida aparece aqui para você conferir.</p>
 <label class="drop" id="lDrop"><input type="file" id="lFile" accept="application/pdf,image/*,.pdf" multiple hidden><span>Arraste os arquivos aqui ou <b>escolha no computador</b></span></label>
@@ -483,7 +485,7 @@ return L.sort((a,b)=>a.p!==b.p?(a.p<b.p?1:-1):((!!a.chave)-(!!b.chave))||((a.m||
 const ITEM=Object.fromEntries(CRON.map(c=>[c.id,c]));
 
 const DEF={val:8,venda:'2028-07',resp:{wave:'andrey',elon:'diego'}};
-const VERSAO='2.8';
+const VERSAO='3.0';
 const API_URL='https://script.google.com/macros/s/AKfycbzfrpGoM-oHz4pOIceDzqyn-Q5yRWOX83nXJSl9yJzLdas0BoGHW-cn1GsLTCb8Puf9/exec';
 const LK='planta-parcela-cache-v1';
 const FDEF={
@@ -678,9 +680,9 @@ const openOf=id=>id?'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/
 const shrink=f=>new Promise(ok=>{if(!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size<1500000)return ok(f);
 const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const k=Math.min(1,2400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>ok(b&&b.size<f.size?b:f),'image/jpeg',.86)};im.onerror=()=>{URL.revokeObjectURL(u);ok(f)};im.src=u});
 const b64=b=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(',')[1]||'');r.onerror=()=>no(r.error);r.readAsDataURL(b)});
-const storeFile=async f=>{const b=await shrink(f);const type=/^(image\/(png|jpeg|gif|webp)|application\/pdf)$/.test(b.type)?b.type:(/\.pdf$/i.test(f.name)?'application/pdf':b.type);
+const storeFile=async(f,destino)=>{const b=await shrink(f);const type=/^(image\/(png|jpeg|gif|webp)|application\/pdf)$/.test(b.type)?b.type:(/\.pdf$/i.test(f.name)?'application/pdf':b.type);
 if(!/^(image\/|application\/pdf)/.test(type))throw {code:'unsupported_type'};if(b.size>20*1048576)throw {code:'too_large'};
-const r=await api('upload',{nome:f.name.slice(0,120),tipo:type,b64:await b64(b)});return {id:r.id,tam:r.tam,tipo:type}};
+const r=await api('upload',{nome:f.name.slice(0,120),tipo:type,destino:destino||'comprovantes',b64:await b64(b)});return {id:r.id,tam:r.tam,tipo:type}};
 const dropFile=async id=>{try{await api('trash',{fileId:id})}catch(e){}};
 let iT;
 const putImv=(id,body)=>{imv[id]=body;render();saveLocal();clearTimeout(iT);iT=setTimeout(async()=>{try{await api('setImovel',{id,dados:imv[id]})}catch(e){falha(e)}},400)};
@@ -755,7 +757,7 @@ $('lbP').addEventListener('click',()=>openLb(lbI-1));$('lbN').addEventListener('
 $('lbDel').addEventListener('click',()=>{const b=$('lbDel');if(b.textContent!=='Confirmar remoção'){b.textContent='Confirmar remoção';return}
 const id=sheetId,fo=(F(id).fotos||[]).slice(),x=fo.splice(lbI,1)[0];patchImv(id,{fotos:fo});if(x)dropFile(x.id);$('lb').classList.remove('on');toast('Foto removida.')});
 const upload=async(files,kind)=>{const id=sheetId;if(!id||!files.length)return;let ok=0;const add=[];
-for(const f of files){try{toast('Enviando '+f.name+'…');const r=await storeFile(f);add.push({id:r.id,nome:f.name.slice(0,120),tipo:r.tipo,tam:r.tam,em:HOJED});ok++}
+for(const f of files){try{toast('Enviando '+f.name+'…');const r=await storeFile(f,kind==='foto'?'fotos':'docs');add.push({id:r.id,nome:f.name.slice(0,120),tipo:r.tipo,tam:r.tam,em:HOJED});ok++}
 catch(e){const c=e&&e.code;toast(c==='too_large'?f.name+' passa de 20 MB.':c==='unsupported_type'?f.name+' não é PDF nem imagem.':'Não foi possível enviar '+f.name+'.')}}
 if(add.length){const cur=F(id),k=kind==='foto'?'fotos':'docs';patchImv(id,{[k]:(cur[k]||[]).concat(add)});toast(ok+(ok===1?' arquivo salvo.':' arquivos salvos.'))}};
 $('upFoto').addEventListener('change',e=>{upload([...e.target.files],'foto');e.target.value=''});
@@ -954,7 +956,11 @@ const j=await r.json();if(!j||!j.ok)throw j||{erro:'resposta'};return j};
 const falha=e=>{if(e&&e.erro==='pin'){sair('O PIN mudou. Digite de novo.');return}setSync('Sem conexão');toast('Não foi possível salvar na planilha. Confira a internet e tente de novo.')};
 const aplicar=d=>{if(!d)return;pagos={};Object.entries(d.pagos||{}).forEach(([k,v])=>{if(v&&(ITEM[k]||v.extra))pagos[k]=v});acertos=d.acertos||{};
 imv=Object.assign({wave:{},elon:{}},d.imoveis||{});if(d.config&&Object.keys(d.config).length)cfg=fixCfg(d.config);
-if(d.indice&&isFinite(+d.indice.pct)){const novo=!IND;IND=d.indice;if(novo||!cfg.manual)cfg.val=Math.round(+IND.pct*100)/100}saveLocal()};
+if(d.indice&&isFinite(+d.indice.pct)){const novo=!IND;IND=d.indice;if(novo||!cfg.manual)cfg.val=Math.round(+IND.pct*100)/100}LEIT=Array.isArray(d.leituras)?d.leituras:[];renderPasta();saveLocal()};
+let LEIT=[];
+const renderPasta=()=>{const b=$('pasta');if(!b)return;b.hidden=false;$('pastaT').hidden=$('pastaL').hidden=!LEIT.length;b.classList.toggle('vazio',!LEIT.length);$('pastaT').textContent=LEIT.length===1?'1 comprovante da pasta para conferir':LEIT.length+' comprovantes da pasta para conferir';
+$('pastaL').innerHTML=LEIT.map(l=>'<li><span>'+esc(l.nome)+(l.valor?' · '+esc(brl.format(l.valor)):'')+'<small>'+esc(l.obs||'')+'</small></span><span class="pb"><a class="btn out sm" target="_blank" rel="noopener" href="https://drive.google.com/file/d/'+encodeURIComponent(l.id)+'/view">Abrir</a><button class="btn out sm" type="button" data-res="'+esc(l.id)+'">Resolvido</button></span></li>').join('')};
+document.addEventListener('click',async e=>{const r=e.target.closest('[data-res]');if(!r)return;r.disabled=true;try{const j=await api('resolverLeitura',{fileId:r.dataset.res});LEIT=LEIT.filter(l=>l.id!==r.dataset.res);renderPasta()}catch(x){r.disabled=false;falha(x)}});
 let carregando=false;
 const carregar=async(silencioso)=>{if(carregando)return;carregando=true;if(!silencioso)setSync('Carregando');
 try{const j=await api('all');if(!$('ov').classList.contains('on')&&!editing){aplicar(j.data);render()}setSync('Sincronizado',true);return true}
@@ -965,6 +971,7 @@ if(!/^https:\/\/script\.google\.com\//.test(API_URL)){$('gE').textContent='Falta
 PIN=v;$('gBtn').disabled=true;$('gE').textContent='';loadAt=Date.now();showLoad('Conferindo o PIN');const ok=await carregar();$('gBtn').disabled=false;if(!ok)$('load').classList.remove('on');
 if(ok){try{localStorage.setItem('pp_pin',PIN)}catch(x){}$('gate').classList.remove('on');document.body.classList.remove('lock');$('gPin').value='';hideLoad()}else if(!$('gE').textContent)$('gE').textContent='Não foi possível conectar à planilha.'});
 $('sync').addEventListener('click',()=>{if(PIN)carregar()});
+$('pastaBtn').addEventListener('click',async()=>{const b=$('pastaBtn');b.disabled=true;$('pastaM').textContent='Lendo a pasta, pode levar um minuto';try{const j=await api('lerPasta');const r=j.res||{};aplicar(j.data);render();$('pastaM').textContent=r.lidos?(r.lancados||0)+' lançado(s), '+(r.conferir||0)+' para conferir.':'Nenhum comprovante novo na pasta.';toast(r.lancados?r.lancados+' pagamento(s) lançado(s) da pasta.':'Nada novo para lançar.')}catch(x){$('pastaM').textContent='Não consegui ler a pasta agora.';falha(x)}finally{b.disabled=false}});
 $('sairBtn').addEventListener('click',()=>sair(''));
 render();
 if(PIN){$('gate').classList.remove('on');document.body.classList.remove('lock');showLoad();carregar().then(()=>hideLoad())}else sair('');
